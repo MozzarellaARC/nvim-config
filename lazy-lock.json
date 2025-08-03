@@ -35,10 +35,10 @@
   "oil.nvim": { "branch": "master", "commit": "bbad9a76b2617ce1221d49619e4e4b659b3c61fc" },
   "plenary.nvim": { "branch": "master", "commit": "b9fd5226c2f76c951fc8ed5923d85e4de065e509" },
   "resession.nvim": { "branch": "master", "commit": "84c81e5fd8a94dc85a60b97089536174e558e288" },
-  "smear-cursor.nvim": { "branch": "main", "commit": "1a3df9af4ed017fafecd93c6837956914f269472" },
+  "smear-cursor.nvim": { "branch": "main", "commit": "58e69a911e7f5296b3d7fec5e7414df5a4ac91fb" },
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "trouble.nvim": { "branch": "main", "commit": "85bedb7eb7fa331a2ccbecb9202d8abba64d37b3" },
   "undotree": { "branch": "master", "commit": "28f2f54a34baff90ea6f4a735ef1813ad875c743" },
   "vim-fugitive": { "branch": "master", "commit": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4" },
-  "yazi.nvim": { "branch": "main", "commit": "005d565eaefe28b33fa4863645138b6a4530c3f2" }
+  "yazi.nvim": { "branch": "main", "commit": "2a32e37332c99bd2056cf0bda6b2496594fb27a3" }
 }
