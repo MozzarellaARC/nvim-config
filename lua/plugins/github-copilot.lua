@@ -20,16 +20,77 @@ return {
         vim.keymap.set('i', '<M-[>', '<Plug>(copilot-previous)', { silent = true })
         vim.keymap.set('i', '<M-\\>', '<Plug>(copilot-suggest)', { silent = true })
         
-        -- Panel system key mappings (modified for vertical split)
+        -- Panel system key mappings (modified for manual prompt input)
         vim.keymap.set('n', '<leader>cp', function()
-            -- Save current window
-            local current_win = vim.api.nvim_get_current_win()
-            vim.cmd('Copilot panel')
-            -- Move the panel to a vertical split
+            -- Create a custom prompt-based panel
+            vim.cmd('vnew')
+            vim.cmd('setlocal buftype=nofile')
+            vim.cmd('setlocal bufhidden=wipe')
+            vim.cmd('setlocal noswapfile')
+            vim.cmd('file copilot-prompt')
+            
+            -- Add instructions and prompt area
+            vim.api.nvim_buf_set_lines(0, 0, -1, false, {
+                "=== Copilot Prompt Panel ===",
+                "",
+                "Instructions:",
+                "1. Type your request/prompt below the '---' line",
+                "2. Press <leader>cg to generate completions",
+                "3. Press q to close this panel",
+                "",
+                "---",
+                ""
+            })
+            
+            -- Move cursor to the prompt area
+            vim.api.nvim_win_set_cursor(0, {9, 0})
+            vim.cmd('startinsert')
             vim.cmd('wincmd L')
         end, { 
             silent = true, 
-            desc = "Open Copilot panel with completions in vertical split" 
+            desc = "Open Copilot prompt panel" 
+        })
+        
+        -- Generate completions based on custom prompt
+        vim.keymap.set('n', '<leader>cg', function()
+            local current_buf = vim.api.nvim_get_current_buf()
+            local buf_name = vim.api.nvim_buf_get_name(current_buf)
+            
+            if buf_name:match("copilot%-prompt") then
+                -- Get the prompt from current buffer
+                local lines = vim.api.nvim_buf_get_lines(current_buf, 8, -1, false)
+                local prompt = table.concat(lines, "\n"):gsub("^%s*", ""):gsub("%s*$", "")
+                
+                if prompt ~= "" then
+                    -- Go to the original file window
+                    vim.cmd('wincmd h')
+                    
+                    -- Insert the prompt as a comment to give Copilot context
+                    local original_line = vim.api.nvim_win_get_cursor(0)[1]
+                    vim.api.nvim_buf_set_lines(0, original_line, original_line, false, {"// " .. prompt})
+                    vim.api.nvim_win_set_cursor(0, {original_line + 1, 0})
+                    
+                    -- Now open Copilot panel with this context
+                    vim.cmd('Copilot panel')
+                    vim.cmd('wincmd L')
+                    
+                    -- Clean up the prompt comment after a short delay
+                    vim.defer_fn(function()
+                        vim.cmd('wincmd h')
+                        vim.api.nvim_buf_set_lines(0, original_line, original_line + 1, false, {})
+                        vim.cmd('wincmd l')
+                    end, 2000)
+                else
+                    vim.notify("Please enter a prompt first", vim.log.levels.WARN)
+                end
+            else
+                -- If not in prompt panel, just open regular panel
+                vim.cmd('Copilot panel')
+                vim.cmd('wincmd L')
+            end
+        end, { 
+            silent = true, 
+            desc = "Generate Copilot completions from prompt" 
         })
         vim.keymap.set('n', '<leader>cs', ':Copilot status<CR>', { 
             silent = true, 
