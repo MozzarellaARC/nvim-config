@@ -1,9 +1,3 @@
-delete this keybinding:
-ctrl+,
-ctrl+shift+comma
-ctorl+shift+period
-alt+f4
-
 *copilot.txt*  GitHub Copilot - Your AI pair programmer
 
 GETTING STARTED                                 *copilot*
