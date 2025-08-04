@@ -13,7 +13,7 @@ map({ "n", "v" }, "l", "<Nop>")
 map({ "n", "v" }, "Q", "<Nop>")
 
 ---General keybindings
-map("n", "z", "u") -- undo with z
+map("n", "z", "u") -- undo with €ýLz€ýL
 map("n", "<C-S-z>", "<C-r>") -- Redo with Shift+z
 
 map("n", "<C-s>", ":w<CR>") -- Save with Ctrl+s
@@ -36,8 +36,8 @@ map("v", "<C-c>", "y") -- Copy selection with Ctrl+c
 
 -- Buffer navigation keybindings
 map("n", "<Tab>", ":wincmd w<CR>")
-map("n", "<C-S-Left>", "<Cmd>BufferPrevious<CR>") -- Go to previous buffer
-map("n", "<C-S-Right>", "<Cmd>BufferNext<CR>") -- Go to next buffer
+map("n", "<C-S-Left>", "<Cmd>bprev<CR>") -- Go to previous buffer
+map("n", "<C-S-Right>", "<Cmd>bnext<CR>") -- Go to next buffer
 
 -- Indentation keybindings
 map("n", "<C-,>", "<<")
@@ -72,7 +72,7 @@ end, { desc = "Toggle Undotree" }) -- Toggle undotree
 
 map("n", "<F3>", "<cmd>Trouble diagnostics toggle<cr>")
 map("v", "<F3>", "<cmd>Trouble diagnostics toggle<cr>")
-map({ "n", "v" }, "<F6>", ":LazyGit<CR>")
+map({ "n", "v" }, "<F5>", ":LazyGit<CR>")
 
 map("n", "q", ":bd<CR>") -- Open symbols outline
 
@@ -120,29 +120,7 @@ local function toggle_diffview()
 end
 
 -- Diffview keybinding
-vim.keymap.set("n", "<F5>", toggle_diffview, { desc = "Toggle Diffview" })
-
--- Helper to check if there's an active search pattern
-local function has_search_pattern()
-	return vim.fn.getreg("/") ~= ""
-end
-
--- Conditional search pattern navigation N/n and <Up>/<Down>
-vim.keymap.set("n", "<Down>", function()
-	if has_search_pattern() then
-		return "n"
-	else
-		return "<Down>" -- fallback to normal down movement if no search
-	end
-end, { expr = true })
-
-vim.keymap.set("n", "<Up>", function()
-	if has_search_pattern() then
-		return "N"
-	else
-		return "<Up>" -- fallback to normal up movement if no search
-	end
-end, { expr = true })
+vim.keymap.set("n", "<F4>", toggle_diffview, { desc = "Toggle Diffview" })
 
 -- Clear search on <Esc>
 vim.keymap.set("n", "<Esc>", function()

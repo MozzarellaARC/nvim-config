@@ -2,7 +2,11 @@ return {
 	"folke/trouble.nvim",
 	cmd = "Trouble",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	opts = {}, -- or custom opts if desired
+	opts = {
+		focus = true, -- Focus the Trouble window when opened
+		follow = true,
+		pinned = true,
+	}, -- or custom opts if desired
 	keys = {
 		{
 			"<leader>xX",
