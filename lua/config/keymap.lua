@@ -146,11 +146,11 @@ map("n", "<C-w>", function()
 		end)
 		if not ok then
 			-- If close fails, fallback to deleting buffer
-			vim.cmd("bd")
+			vim.cmd("BufferDelete")
 		end
 	else
 		-- Single window or special buffer type: delete buffer
-		vim.cmd("bd")
+		vim.cmd("BufferDelete")
 	end
 end, { noremap = true, nowait = true })
 
