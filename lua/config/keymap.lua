@@ -169,9 +169,33 @@ end
 -- Set up the keymap
 vim.keymap.set("n", "<F5>", toggle_diffview, { desc = "Toggle Diffview" })
 
--- Search navigation keybindings
-map("n", "<Down>", "n") -- Next search result with down arrow
-map("n", "<Up>", "N") -- Previous search result with up arrow
+-- Helper to check if there's an active search pattern
+local function has_search_pattern()
+	return vim.fn.getreg("/") ~= ""
+end
+
+-- Conditional keymaps for Down/Up arrow
+vim.keymap.set("n", "<Down>", function()
+	if has_search_pattern() then
+		return "n"
+	else
+		return "<Down>" -- fallback to normal down movement if no search
+	end
+end, { expr = true })
+
+vim.keymap.set("n", "<Up>", function()
+	if has_search_pattern() then
+		return "N"
+	else
+		return "<Up>" -- fallback to normal up movement if no search
+	end
+end, { expr = true })
+
+-- Clear search on <Esc>
+vim.keymap.set("n", "<Esc>", function()
+	vim.fn.setreg("/", "")
+	vim.cmd("nohlsearch")
+end)
 
 -- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
 -- FUNCTIONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS
