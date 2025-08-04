@@ -12,54 +12,6 @@ map({ "n", "v" }, "k", "<Nop>")
 map({ "n", "v" }, "l", "<Nop>")
 map({ "n", "v" }, "Q", "<Nop>")
 
--- HELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWE
--- POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL
--- HELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWE
--- POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL
--- HELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWE
--- POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL
---
--- This to PowerShell Settings
---    {
---             "command":
---             {
---                 "action": "sendInput",
---                 "input": "\u001b[90;5u"
---             },
---             "id": "User.sendInput.CtrlShiftZ"
---         },
---    {
---             "command":
---             {
---                 "action": "sendInput",
---                 "input": "\u001b[44;5u"
---             },
---             "id": "User.sendInput.CtrlComma"
---         },
---    {
---             "command":
---             {
---                 "action": "sendInput",
---                 "input": "\u001b[46;5u"
---             },
---             "id": "User.sendInput.CtrlPeriod"
---         },
---    {
---             "command":
---             {
---                 "action": "sendInput",
---                 "input": "\u001b[47;5u"
---             },
---             "id": "User.sendInput.CtrlSlash"
---         }
--- --
--- HELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWE
--- POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL
--- HELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWE
--- POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL
--- HELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWE
--- POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL, POWERSHELL
-
 ---General keybindings
 map("n", "z", "u") -- undo with z
 map("n", "<C-S-z>", "<C-r>") -- Redo with Shift+z
@@ -130,7 +82,7 @@ map({ "n", "v" }, "<F6>", ":LazyGit<CR>")
 -- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
 -- FUNCTIONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS
 
--- Override the entire C-w prefix with conditional behavior
+-- Buffer deleteion Conditional
 map("n", "<C-w>", function()
 	-- Get the number of windows in current tab
 	local win_count = vim.fn.winnr("$")
