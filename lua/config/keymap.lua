@@ -174,7 +174,7 @@ local function has_search_pattern()
 	return vim.fn.getreg("/") ~= ""
 end
 
--- Conditional keymaps for Down/Up arrow
+-- Conditional search pattern navigation N/n and <Up>/<Down>
 vim.keymap.set("n", "<Down>", function()
 	if has_search_pattern() then
 		return "n"
