@@ -72,8 +72,9 @@ end, { desc = "Toggle Undotree" }) -- Toggle undotree
 
 map("n", "<F3>", "<cmd>Trouble diagnostics toggle<cr>")
 map("v", "<F3>", "<cmd>Trouble diagnostics toggle<cr>")
-
 map({ "n", "v" }, "<F6>", ":LazyGit<CR>")
+
+map("n", "q", ":bd<CR>") -- Open symbols outline
 
 -- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
 -- FUNCTIONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS
