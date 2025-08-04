@@ -166,7 +166,7 @@ local function toggle_diffview()
 	end
 end
 
--- Set up the keymap
+-- Diffview keybinding
 vim.keymap.set("n", "<F5>", toggle_diffview, { desc = "Toggle Diffview" })
 
 -- Helper to check if there's an active search pattern
