@@ -2,25 +2,25 @@ return {
 	"sindrets/diffview.nvim",
 	config = function()
 		require("diffview").setup({
-			view = {
-				-- Configure the layout and behavior of different types of views.
-				default = {
-					-- Config for changed files, and staged files in diff views.
-					layout = "diff2_horizontal",
-					winbar_info = false,
-				},
-				merge_tool = {
-					-- Config for conflicted files in diff views during a merge or rebase.
-					layout = "diff3_horizontal",
-					disable_diagnostics = true,
-					winbar_info = true,
-				},
-				file_history = {
-					-- Config for changed files in file history views.
-					layout = "diff2_horizontal",
-					winbar_info = false,
-				},
-			},
+			-- view = {
+			-- 	-- Configure the layout and behavior of different types of views.
+			-- 	default = {
+			-- 		-- Config for changed files, and staged files in diff views.
+			-- 		layout = "diff2_horizontal",
+			-- 		winbar_info = false,
+			-- 	},
+			-- 	merge_tool = {
+			-- 		-- Config for conflicted files in diff views during a merge or rebase.
+			-- 		layout = "diff3_horizontal",
+			-- 		disable_diagnostics = true,
+			-- 		winbar_info = true,
+			-- 	},
+			-- 	file_history = {
+			-- 		-- Config for changed files in file history views.
+			-- 		layout = "diff2_horizontal",
+			-- 		winbar_info = false,
+			-- 	},
+			-- },
 			keymaps = {
 				view = {
 					-- Add synchronized scrolling keymaps

@@ -16,7 +16,7 @@ return {
 				-- 'vim-language-server',
 				-- 'lua-language-server',
 				"typescript-language-server",
-				"rust-analyzer (keywords: rust)",
+				"rust-analyzer",
 				"harper-ls",
 
 				"eslint-lsp",
@@ -46,9 +46,9 @@ return {
 
 			-- if set to true this will check each tool for updates. If updates
 			-- are available the tool will be updated. This setting does not
-			-- affect :MasonToolsUpdate or :MasonToolsInstall.
+			-- affect :MasonToolsUpdate or :MsonasonToolsInstall.
 			-- Default: false
-			auto_update = false,
+			auto_update = true,
 
 			-- I dont know what the hell is going ooon
 
