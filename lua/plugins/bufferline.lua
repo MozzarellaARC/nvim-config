@@ -11,7 +11,7 @@ return {
 				persist_buffer_sort = true,
 				separator_style = "slope",
 
-				tab_size = 3,
+				-- tab_size = 3,
 
 				diagnostic = true,
 				diagnostic_update_in_insert = true,
