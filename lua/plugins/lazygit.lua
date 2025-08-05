@@ -18,4 +18,11 @@ return {
 	keys = {
 		{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
 	},
+	config = function()
+		-- Configure square borders instead of rounded
+		-- vim.g.lazygit_floating_window_border_chars = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
+		-- Optional: adjust other floating window settings
+		vim.g.lazygit_floating_window_use_plenary = 1
+		vim.g.lazygit_floating_window_scaling_factor = 0.8 -- 90% of screen size
+	end,
 }

@@ -13,7 +13,7 @@ map({ "n", "v" }, "l", "<Nop>")
 map({ "n", "v" }, "Q", "<Nop>")
 
 ---General keybindings
-map("n", "z", "u") -- undo with €ýLz€ýL
+map("n", "z", "u") -- undo with ï¿½ï¿½Lzï¿½ï¿½L
 map("n", "<C-S-z>", "<C-r>") -- Redo with Shift+z
 
 map("n", "<C-s>", ":w<CR>") -- Save with Ctrl+s
@@ -73,6 +73,8 @@ end, { desc = "Toggle Undotree" }) -- Toggle undotree
 map("n", "<F3>", "<cmd>Trouble diagnostics toggle<cr>")
 map("v", "<F3>", "<cmd>Trouble diagnostics toggle<cr>")
 map({ "n", "v" }, "<F5>", ":LazyGit<CR>")
+
+-- map({ "n", "v" }, "<F5>")
 
 map("n", "q", ":bd<CR>") -- Open symbols outline
 
