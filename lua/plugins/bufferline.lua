@@ -12,6 +12,8 @@ return {
 				separator_style = "slope",
 
 				-- tab_size = 3,
+				--
+				--test3
 
 				diagnostic = true,
 				diagnostic_update_in_insert = true,

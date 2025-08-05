@@ -34,6 +34,8 @@ map("v", "<C-c>", "y") -- Copy selection with Ctrl+c
 -- map("n", "<leader>gh", ":GBrowse<CR>")
 -- map("v", "<leader>gh", ":GBrowse<CR>")
 
+map("n", "<leader>cr", ":!git restore .")
+
 -- Buffer navigation keybindings
 map("n", "<Tab>", ":wincmd w<CR>")
 map("n", "<C-S-Left>", "<Cmd>bprev<CR>") -- Go to previous buffer

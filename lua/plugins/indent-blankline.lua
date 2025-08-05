@@ -7,6 +7,9 @@ return {
 		-- whitespace = {
 		-- 	char = "┇",
 		-- },
+		--
+		--
+		--
 	},
 	config = function(_, opts)
 		local highlight = {

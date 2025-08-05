@@ -9,6 +9,8 @@ return {
 		"LazyGitFilter",
 		"LazyGitFilterCurrentFile",
 	},
+
+	--
 	-- optional for floating window border decoration
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -22,7 +24,7 @@ return {
 		-- Configure square borders instead of rounded
 		-- vim.g.lazygit_floating_window_border_chars = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
 		-- Optional: adjust other floating window settings
-		vim.g.lazygit_floating_window_use_plenary = 1
-		vim.g.lazygit_floating_window_scaling_factor = 0.8 -- 90% of screen size
+		-- vim.g.lazygit_floating_window_use_plenary = 1
+		vim.g.lazygit_floating_window_scaling_factor = 0.9 -- 90% of screen size
 	end,
 }
