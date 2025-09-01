@@ -10,6 +10,8 @@ return {
 		"LazyGitFilterCurrentFile",
 	},
 
+	-- test
+
 	--
 	-- optional for floating window border decoration
 	dependencies = {

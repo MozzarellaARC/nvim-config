@@ -34,7 +34,7 @@ map("v", "<C-c>", "y") -- Copy selection with Ctrl+c
 -- map("n", "<leader>gh", ":GBrowse<CR>")
 -- map("v", "<leader>gh", ":GBrowse<CR>")
 
-map("n", "<leader>cr", ":!git restore .")
+-- test
 
 -- Buffer navigation keybindings
 map("n", "<Tab>", ":wincmd w<CR>")
@@ -79,6 +79,8 @@ map({ "n", "v" }, "<F5>", ":LazyGit<CR>")
 -- map({ "n", "v" }, "<F5>")
 
 map("n", "q", ":bd<CR>") -- Open symbols outline
+
+-- test
 
 -- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
 -- FUNCTIONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS

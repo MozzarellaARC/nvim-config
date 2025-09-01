@@ -11,6 +11,9 @@ return {
 		--
 		--
 	},
+
+	-- test
+
 	config = function(_, opts)
 		local highlight = {
 			"RainbowRed",
