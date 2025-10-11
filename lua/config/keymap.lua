@@ -42,14 +42,14 @@ map("v", "<C-/>", "<Cmd>normal gcgv<CR>", { silent = true })
 map("i", "<C-/>", "<Esc><Cmd>normal gcc<CR>i", { silent = true })
 
 --- Yazi keybindings
-map("n", "<space><space>", "<Cmd>Yazi<CR>") -- Open yazi at current file
-map("v", "<space><space>", "<Cmd>Yazi<CR>") -- Open yazi at current file
-map("n", "<space>cw", "<Cmd>Yazi cwd<CR>")  -- Open yazi in working directory
+map({ "n", "v" }, "<space><space>", "<Cmd>Yazi<CR>") -- Open yazi at current file
+map("n", "<space>cw", "<Cmd>Yazi cwd<CR>")           -- Open yazi in working directory
 
 -- Directory tree keybindings
-map("n", "<F1>", "<Cmd>Neotree toggle<CR>") -- Open yazi in current file
-map("v", "<F1>", "<Cmd>Neotree toggle<CR>") -- Open yazi in current file
+-- map("n", "<F1>", "<Cmd>Neotree toggle<CR>") -- Open yazi in current file
+-- map("v", "<F1>", "<Cmd>Neotree toggle<CR>") -- Open yazi in current file
 
+-- Undotree
 map("n", "<F2>", function()
     _G.undotree_toggle()
 end, { desc = "Toggle Undotree" }) -- Toggle undotree
@@ -60,8 +60,6 @@ end, { desc = "Toggle Undotree" }) -- Toggle undotree
 map("n", "<F3>", "<cmd>Trouble diagnostics toggle<cr>")
 map("v", "<F3>", "<cmd>Trouble diagnostics toggle<cr>")
 map({ "n", "v" }, "<F5>", ":LazyGit<CR>")
-
--- map({ "n", "v" }, "<F5>")
 
 map("n", "q", ":bd<CR>") -- Open symbols outline
 
