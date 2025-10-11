@@ -15,7 +15,7 @@ vim.lsp.enable('luals')
 vim.lsp.enable('clangd')
 
 -- Provider
-vim.g.python3_host_prog = "C:\Python313\python.exe"
+vim.g.python3_host_prog = 'C:/Python313/python.exe'
 
 -- Key Remap
 require("config.keymap")
