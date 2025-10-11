@@ -120,10 +120,10 @@ local function toggle_diffview()
 end
 
 -- Diffview keybinding
-vim.keymap.set("n", "<F4>", toggle_diffview, { desc = "Toggle Diffview" })
+map("n", "<F4>", toggle_diffview, { desc = "Toggle Diffview" })
 
 -- Clear search on <Esc>
-vim.keymap.set("n", "<Esc>", function()
+map("n", "<Esc>", function()
     vim.fn.setreg("/", "")
     vim.cmd("nohlsearch")
 end)
