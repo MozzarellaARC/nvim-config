@@ -17,18 +17,9 @@ map("i", "<C-s>", "<Esc>:w<CR>") -- Save with Ctrl+s
 map("v", "<C-s>", "<Esc>:w<CR>") -- Save with Ctrl+s
 -- map('n', '<C-S>s', ':wa<CR>') -- Save all buffers with Ctrl+Alt+s If this is turned on, it will gives delays to the Ctrl+s keybinding
 
+-- Terminals
 map("n", "<F4>", ":qa!<CR>") -- Exit Neovim
 map("v", "<C-c>", "y")       -- Copy selection with Ctrl+c
-
---- Fugitive keybindings
--- map("n", "<leader>gs", ":Git<CR>")
--- map("n", "<leader>gd", ":Gdiffsplit<CR>")
--- map("n", "<leader>gc", ":Git commit<CR>")
--- map("n", "<leader>gp", ":Git push<CR>")
--- map("n", "<leader>gl", ":Git pull<CR>")
--- map("n", "<leader>gb", ":Git blame<CR>")
--- map("n", "<leader>gh", ":GBrowse<CR>")
--- map("v", "<leader>gh", ":GBrowse<CR>")
 
 -- Buffer navigation keybindings
 map("n", "<Tab>", ":wincmd w<CR>")
@@ -73,8 +64,6 @@ map({ "n", "v" }, "<F5>", ":LazyGit<CR>")
 -- map({ "n", "v" }, "<F5>")
 
 map("n", "q", ":bd<CR>") -- Open symbols outline
-
--- test
 
 -- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
 -- FUNCTIONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS
