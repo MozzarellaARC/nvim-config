@@ -35,14 +35,14 @@ return {
 			},
 		},
 		sections = {
-			lualine_a = { "mode" },
-			lualine_b = { "branch", "diff", "diagnostics" },
+			lualine_a = { "branch", "diff", "diagnostics" },
+			lualine_b = {},
 			lualine_c = {
 				{
 					"filename",
 					file_status = true, -- Displays file status (readonly status, modified status)
 					newfile_status = false, -- Display new file status (new file means no write after created)
-					path = 3,
+					path = 1,
 					-- 0: Just the filename
 					-- 1: Relative path
 					-- 2: Absolute path
@@ -60,8 +60,8 @@ return {
 				},
 			},
 			lualine_x = { "encoding", "fileformat", "filetype" },
-			lualine_y = { "progress" },
-			lualine_z = { "location" },
+			lualine_y = {},
+			lualine_z = {},
 		},
 		inactive_sections = {
 			lualine_a = {},

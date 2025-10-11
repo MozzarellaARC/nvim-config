@@ -23,20 +23,30 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- vim.lsp
-vim.lsp.config("*", {
-	capabilities = {
-		textDocument = {
-			semanticTokens = {
-				multilineTokenSupport = true,
-			},
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+local ok, blink = pcall(require, "blink.cmp")
+if ok then
+	capabilities = vim.tbl_deep_extend("force", capabilities, blink.get_lsp_capabilities())
+end
+
+capabilities = vim.tbl_deep_extend("force", capabilities, {
+	textDocument = {
+		semanticTokens = {
+			multilineTokenSupport = true,
 		},
 	},
+})
+
+vim.lsp.config("*", {
+	capabilities = capabilities,
 	root_markers = { ".git" },
 })
 
 -- LSP
 vim.lsp.enable("luals")
 vim.lsp.enable("clangd")
+vim.lsp.enable("pyright")
 
 -- Provider
 vim.g.python3_host_prog = "C:/Python313/python.exe"
