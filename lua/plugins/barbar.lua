@@ -189,7 +189,9 @@ return {
 						for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
 							local ok_buf, buf = pcall(vim.api.nvim_win_get_buf, win)
 							if ok_buf and vim.api.nvim_buf_is_valid(buf) then
-								local ok_ft, bufft = pcall(vim.api.nvim_buf_get_option, buf, "filetype")
+								local ok_ft, bufft = pcall(function()
+									return vim.bo[buf].filetype
+								end)
 								if ok_ft and vim.tbl_contains(diffview_fts, bufft) then
 									has_diffview = true
 									break
