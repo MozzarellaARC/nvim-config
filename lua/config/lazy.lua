@@ -15,11 +15,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.lsp.enable("lua_ls")
-vim.lsp.enable("pwsh")
-vim.lsp.enable("copilot")
-vim.lsp.inline_completion.enable()
-
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
@@ -27,28 +22,7 @@ vim.lsp.inline_completion.enable()
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- Provider
-vim.g.python3_host_prog = "C:/Users/M/scoop/shims/python313.exe"
 
--- Disable netrw (use oil.nvim instead)
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- Editor
-vim.opt.tabstop = 4 -- How many columns a tab counts for
-vim.opt.softtabstop = 4 -- How many spaces a tab feels like in insert mode
-vim.opt.shiftwidth = 4 -- How many spaces to use for each step of (auto)indent
-vim.opt.expandtab = true -- Use spaces instead of tabs
-vim.opt.cindent = true -- Indentation style for C-like languages
-vim.opt.number = true -- Show absolute line numbers
-
--- Cache optimization
-vim.o.swapfile = false
-vim.opt.autoread = true
-
--- Clipboard
-
-vim.opt.clipboard = "unnamedplus"
 
 -- Setup lazy.nvim
 require("lazy").setup({

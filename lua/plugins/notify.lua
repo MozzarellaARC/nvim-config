@@ -124,7 +124,7 @@ return {
 					end
 				end,
 			})
-			
+
 			-- Notify on file rename (when a buffer gets a new name)
 			vim.api.nvim_create_autocmd("BufFilePost", {
 				group = group,

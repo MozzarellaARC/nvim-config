@@ -59,6 +59,34 @@ vim.api.nvim_create_autocmd("CursorHold", {
 -- Set updatetime for CursorHold (default is 4000ms, this makes it faster)
 vim.opt.updatetime = 500
 
+-- LSP
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("pwsh")
+vim.lsp.enable("copilot")
+vim.lsp.inline_completion.enable()
+
+-- Provider
+vim.g.python3_host_prog = "C:/Users/M/scoop/shims/python313.exe"
+
+-- Disable netrw (use oil.nvim instead)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- Editor
+vim.opt.tabstop = 4 -- How many columns a tab counts for
+vim.opt.softtabstop = 4 -- How many spaces a tab feels like in insert mode
+vim.opt.shiftwidth = 4 -- How many spaces to use for each step of (auto)indent
+vim.opt.expandtab = true -- Use spaces instead of tabs
+vim.opt.cindent = true -- Indentation style for C-like languages
+vim.opt.number = true -- Show absolute line numbers
+
+-- Cache optimization
+vim.o.swapfile = false
+vim.opt.autoread = true
+
+-- Clipboard
+vim.opt.clipboard = "unnamedplus"
+
 -- Package Manager
 require("config.lazy")
 -- Key Remap

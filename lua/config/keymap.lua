@@ -59,8 +59,8 @@ map({ "n", "v" }, "<space><space>", "<Cmd>Yazi<CR>") -- Open yazi at current fil
 map("n", "<space>cw", "<Cmd>Yazi cwd<CR>") -- Open yazi in working directory
 
 -- Directory tree keybindings
--- map("n", "<F1>", "<Cmd>Neotree toggle<CR>") -- Open yazi in current file
--- map("v", "<F1>", "<Cmd>Neotree toggle<CR>") -- Open yazi in current file
+map("n", "<F1>", "<Cmd>Neotree toggle<CR>") -- Open yazi in current file
+map("v", "<F1>", "<Cmd>Neotree toggle<CR>") -- Open yazi in current file
 
 -- Undotree
 map("n", "<F2>", function()
