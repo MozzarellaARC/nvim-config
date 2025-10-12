@@ -217,7 +217,7 @@ return {
 				error = function(message)
 					vim.notify(message, vim.log.levels.ERROR, {
 						title = "Error",
-						timeout = 3000,
+						timeout = 10000,
 					})
 				end,
 			}
