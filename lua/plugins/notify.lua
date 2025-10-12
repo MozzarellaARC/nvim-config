@@ -124,7 +124,50 @@ return {
 					end
 				end,
 			})
+			
+			-- Notify on file rename (when a buffer gets a new name)
+			vim.api.nvim_create_autocmd("BufFilePost", {
+				group = group,
+				callback = function()
+					local filename = vim.fn.expand("%:t")
+					local buftype = vim.bo.buftype
+					-- Exclude special buffers (like yazi, terminal, help, etc.)
+					if filename ~= "" and buftype == "" and filename ~= "yazi" then
+						vim.notify(" Renamed to: " .. filename, vim.log.levels.INFO, {
+							title = "File Operation",
+							timeout = 2000,
+						})
+					end
+				end,
+			})
 
+			-- Notify on new file creation
+			vim.api.nvim_create_autocmd("BufNewFile", {
+				group = group,
+				callback = function()
+					local filename = vim.fn.expand("%:t")
+					if filename ~= "" then
+						vim.notify(" Created: " .. filename, vim.log.levels.INFO, {
+							title = "File Operation",
+							timeout = 2000,
+						})
+					end
+				end,
+			})
+
+			-- Notify on file deletion (when buffer is deleted and file doesn't exist)
+			vim.api.nvim_create_autocmd("BufDelete", {
+				group = group,
+				callback = function()
+					local filename = vim.fn.expand("<afile>:t")
+					if filename ~= "" and vim.fn.filereadable(vim.fn.expand("<afile>")) == 0 then
+						vim.notify(" Deleted: " .. filename, vim.log.levels.WARN, {
+							title = "File Operation",
+							timeout = 2000,
+						})
+					end
+				end,
+			})
 			-- Notify on directory change
 			vim.api.nvim_create_autocmd("DirChanged", {
 				group = group,

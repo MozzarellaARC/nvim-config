@@ -48,7 +48,7 @@ return {
 			focus_on_close = "left",
 
 			-- Hide inactive buffers and file extensions. Other options are `alternate`, `current`, and `visible`.
-			hide = { extensions = true, inactive = true },
+			hide = { extensions = false, inactive = false },
 
 			-- Disable highlighting alternate buffers
 			highlight_alternate = false,
@@ -64,7 +64,7 @@ return {
 				-- Valid options to display the buffer index and -number are `true`, 'superscript' and 'subscript'
 				buffer_index = false,
 				buffer_number = false,
-				button = "",
+				button = "X",
 				-- Enables / disables diagnostic symbols
 				diagnostics = {
 					[vim.diagnostic.severity.ERROR] = { enabled = true, icon = "ﬀ" },
