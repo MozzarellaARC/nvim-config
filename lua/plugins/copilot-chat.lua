@@ -31,18 +31,32 @@ return {
 	config = function(_, opts)
 		require("CopilotChat").setup(opts)
 		
-		-- Keymap to toggle chat with F5
+		-- Keymap to toggle chat with F5 using unified view system
 		vim.keymap.set('n', '<F5>', function()
-			local chat = require("CopilotChat")
-			if chat.chat:visible() then
-				chat.close()
+			-- Use the global toggle_view function if available
+			if _G.toggle_view then
+				_G.toggle_view("copilot", function()
+					local chat = require("CopilotChat")
+					chat.open()
+					-- Move window to the right
+					vim.cmd("wincmd L")
+					-- Return focus to source window and disable wrapping
+					vim.cmd("wincmd p")
+					vim.wo.wrap = false
+				end)
 			else
-				chat.open()
-				-- Move window to the right
-				vim.cmd("wincmd L")
-				-- Return focus to source window and disable wrapping
-				vim.cmd("wincmd p")
-				vim.wo.wrap = false
+				-- Fallback if toggle_view not yet loaded
+				local chat = require("CopilotChat")
+				if chat.chat:visible() then
+					chat.close()
+					_G.active_side_view = nil
+				else
+					chat.open()
+					vim.cmd("wincmd L")
+					vim.cmd("wincmd p")
+					vim.wo.wrap = false
+					_G.active_side_view = "copilot"
+				end
 			end
 		end, { desc = 'Toggle Copilot Chat', silent = true })
 		
