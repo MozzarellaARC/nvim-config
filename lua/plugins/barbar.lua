@@ -20,7 +20,7 @@ return {
 				-- version = "^1.0.0", -- optional: only update when a new 1.x version is released
 			},
 		})
-		
+
 		-- Auto-hide barbar when diffview is open
 		vim.api.nvim_create_autocmd({ "FileType" }, {
 			pattern = { "DiffviewFiles", "DiffviewFileHistory" },
@@ -30,17 +30,21 @@ return {
 				end)
 			end,
 		})
-		
+
 		-- Restore barbar when leaving diffview
 		vim.api.nvim_create_autocmd({ "BufEnter", "TabEnter" }, {
 			callback = function()
 				vim.schedule(function()
-					local ok, ft = pcall(function() return vim.bo.filetype end)
-					if not ok then return end
-					
+					local ok, ft = pcall(function()
+						return vim.bo.filetype
+					end)
+					if not ok then
+						return
+					end
+
 					local diffview_fts = { "DiffviewFiles", "DiffviewFileHistory" }
 					local is_diffview = vim.tbl_contains(diffview_fts, ft)
-					
+
 					if not is_diffview then
 						local has_diffview = false
 						for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do

@@ -30,6 +30,13 @@ return {
 					width = 35,
 				},
 			},
+			hooks = {
+				diff_buf_read = function(bufnr)
+					vim.api.nvim_buf_call(bufnr, function()
+						vim.opt_local.wrap = false
+					end)
+				end,
+			},
 		})
 	end,
 }
