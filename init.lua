@@ -36,16 +36,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 			focusable = false,
 			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
 			-- Custom border characters: top-left, top, top-right, right, bottom-right, bottom, bottom-left, left
-			border = { " "
-				-- { "┏", "FloatBorder" },
-				-- { "━", "FloatBorder" },
-				-- { "┓", "FloatBorder" },
-				-- { "┃", "FloatBorder" },
-				-- { "┛", "FloatBorder" },
-				-- { "━", "FloatBorder" },
-				-- { "┗", "FloatBorder" },
-				-- { "┃", "FloatBorder" },
-			},
+			border = { " " },
 			source = "always",
 			prefix = " ",
 			scope = "cursor",
