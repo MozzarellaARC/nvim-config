@@ -5,7 +5,7 @@
       "src": "https://github.com/thesimonho/kanagawa-paper.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "3a274c3",
+      "rev": "ac98db2",
       "src": "https://github.com/neovim/nvim-lspconfig"
     }
   }
