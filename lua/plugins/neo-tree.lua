@@ -1,5 +1,4 @@
 return {
-
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v3.x",
 	dependencies = {
@@ -9,6 +8,12 @@ return {
 	},
 	lazy = false, -- neo-tree will lazily load itself
 	opts = {
+		popup_border_style = "",
+		git_status = {
+			window = {
+				position = "float",
+			},
+		},
 		filesystem = {
 			window = {
 				mappings = {
