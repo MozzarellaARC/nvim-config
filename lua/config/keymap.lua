@@ -115,7 +115,7 @@ local function toggle_diffview()
 		vim.cmd("DiffviewClose")
 	else
 		-- If diffview is closed, open it
-		vim.cmd("DiffviewOpen")
+		vim.cmd("DiffviewFileHistory")
 	end
 end
 
