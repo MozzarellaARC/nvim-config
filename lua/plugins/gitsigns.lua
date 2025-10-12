@@ -19,15 +19,15 @@ return {
 	},
 	signs_staged_enable = true,
 	signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-	numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+	numhl = true, -- Toggle with `:Gitsigns toggle_numhl` - Highlight line numbers
 	linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-	word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+	word_diff = true, -- Toggle with `:Gitsigns toggle_word_diff` - Show word-level diffs
 	watch_gitdir = {
 		follow_files = true,
 	},
 	auto_attach = true,
-	attach_to_untracked = false,
-	current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+	attach_to_untracked = true, -- Show signs for untracked files
+	current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame` - Show blame info
 	current_line_blame_opts = {
 		virt_text = true,
 		virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
