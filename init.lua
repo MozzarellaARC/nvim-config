@@ -18,6 +18,12 @@ vim.diagnostic.config({
 	},
 })
 
+-- Define diagnostic signs for the gutter
+vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo" })
+vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
+
 -- Enable inline diagnostics (Neovim 0.10+)
 vim.diagnostic.config({
 	virtual_text = {
@@ -79,6 +85,10 @@ vim.opt.shiftwidth = 4 -- How many spaces to use for each step of (auto)indent
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.cindent = true -- Indentation style for C-like languages
 vim.opt.number = true -- Show absolute line numbers
+
+-- Gutter/Sign Column
+-- vim.opt.signcolumn = "yes" -- Always show sign column to prevent text shifting
+-- vim.opt.numberwidth = 4 -- Width of the number column
 
 -- Cache optimization
 vim.o.swapfile = false
