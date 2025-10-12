@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "kanagawa-paper.nvim": {
+      "rev": "b0c4d7c",
+      "src": "https://github.com/thesimonho/kanagawa-paper.nvim"
+    },
     "nvim-lspconfig": {
       "rev": "3a274c3",
       "src": "https://github.com/neovim/nvim-lspconfig"

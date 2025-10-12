@@ -143,7 +143,9 @@ return {
 				group = group,
 				callback = function()
 					local filename = vim.fn.expand("%:t")
-					if filename ~= "" then
+					local buftype = vim.bo.buftype
+					-- Exclude special buffers (like yazi, terminal, help, etc.)
+					if filename ~= "" and buftype == "" and filename ~= "yazi" then
 						vim.notify(" Renamed to: " .. filename, vim.log.levels.INFO, {
 							title = "File Operation",
 							timeout = 2000,

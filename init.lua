@@ -1,11 +1,10 @@
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/thesimonho/kanagawa-paper.nvim" },
 })
-
-vim.lsp.enable("luals", "clangd", "pyright")
 
 -- Package Manager
 require("config.lazy")
-
 -- Key Remap
 require("config.keymap")
+vim.cmd.colorscheme("kanagawa-paper-ink")

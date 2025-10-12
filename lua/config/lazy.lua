@@ -15,6 +15,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("pwsh")
+vim.lsp.enable("copilot")
+vim.lsp.inline_completion.enable()
+
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
@@ -23,7 +28,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- Provider
-vim.g.python3_host_prog = "C:/Python313/python.exe"
+vim.g.python3_host_prog = "C:/Users/M/scoop/shims/python313.exe"
 
 -- Disable netrw (use oil.nvim instead)
 vim.g.loaded_netrw = 1
