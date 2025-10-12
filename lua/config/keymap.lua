@@ -27,7 +27,7 @@ map("n", "<C-S-Left>", function()
 	local ft = vim.bo.filetype
 	local diffview_fts = { "DiffviewFiles", "DiffviewFileHistory", "diff" }
 	if not vim.tbl_contains(diffview_fts, ft) then
-		vim.cmd("bprev")
+		vim.cmd("BufferPrevious")
 	end
 end) -- Go to previous buffer
 
@@ -35,7 +35,7 @@ map("n", "<C-S-Right>", function()
 	local ft = vim.bo.filetype
 	local diffview_fts = { "DiffviewFiles", "DiffviewFileHistory", "diff" }
 	if not vim.tbl_contains(diffview_fts, ft) then
-		vim.cmd("bnext")
+		vim.cmd("BufferNext")
 	end
 end) -- Go to next buffer
 
