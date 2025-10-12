@@ -9,4 +9,15 @@ vim.lsp.config("pyright", {
 		"pyrightconfig.json",
 		".git",
 	},
+	settings = {
+		python = {
+			analysis = {
+				-- Ignore specific modules like bpy
+				ignore = { "bpy" },
+				-- Optionally suppress stub warnings
+				reportMissingTypeStubs = "none",
+			},
+		},
+	},
+
 })
