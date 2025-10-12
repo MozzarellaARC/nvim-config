@@ -1,41 +1,68 @@
 return {
-    {
-        "CopilotC-Nvim/CopilotChat.nvim",
-        dependencies = {
-            { "nvim-lua/plenary.nvim", branch = "master" },
-        },
-        build = "make tiktoken",
-        opts = {
-            model = 'gpt-4.1',       -- AI model to use
-            temperature = 0.1,       -- Lower = focused, higher = creative
-            window = {
-                layout = 'vertical', -- 'vertical', 'horizontal', 'float'
-                width = 0.5,         -- 50% of screen width
+	"CopilotC-Nvim/CopilotChat.nvim",
+	dependencies = {
+		{ "nvim-lua/plenary.nvim", branch = "master" },
+	},
+	build = "make tiktoken",
+	opts = {
+		model = "gpt-4.1", -- AI model to use
+		temperature = 0.1, -- Lower = focused, higher = creative
+		
+		window = {
+			layout = "vertical", -- 'vertical' = right side, 'horizontal' = bottom, 'float' = floating
+			width = 0.5, -- 50% of screen width
+			border = "rounded", -- 'single', 'double', 'rounded', 'solid', 'none'
+			title = "🤖 AI Assistant",
+			relative = "editor", -- Position relative to editor
+		},
 
-                noinsert = true,
-                noselect = true,
-                completeopt = true,
-            },
-            auto_insert_mode = true, -- Enter insert mode when opening
-            {
-                window = {
-                    layout = 'float',
-                    width = 80,         -- Fixed width in columns
-                    height = 20,        -- Fixed height in rows
-                    border = 'rounded', -- 'single', 'double', 'rounded', 'solid'
-                    title = '🤖 AI Assistant',
-                    zindex = 100,       -- Ensure window stays on top
-                },
+		headers = {
+			user = "👤 You",
+			assistant = "🤖 Copilot",
+			tool = "🔧 Tool",
+		},
 
-                headers = {
-                    user = '👤 You',
-                    assistant = '🤖 Copilot',
-                    tool = '🔧 Tool',
-                },
-
-                separator = '━━',
-                auto_fold = true, -- Automatically folds non-assistant messages
-            }
-        },
-    },
+		separator = "━━",
+		auto_insert_mode = false, -- Don't enter insert mode when opening
+		auto_fold = false, -- Automatically folds non-assistant messages
+	},
+	
+	-- Auto-command to customize chat buffer behavior
+	config = function(_, opts)
+		require("CopilotChat").setup(opts)
+		
+		-- Keymap to toggle chat with F5
+		vim.keymap.set('n', '<F5>', function()
+			local chat = require("CopilotChat")
+			if chat.chat:visible() then
+				chat.close()
+			else
+				chat.open()
+				-- Move window to the right
+				vim.cmd("wincmd L")
+				-- Return focus to source window and disable wrapping
+				vim.cmd("wincmd p")
+				vim.wo.wrap = false
+			end
+		end, { desc = 'Toggle Copilot Chat', silent = true })
+		
+		vim.api.nvim_create_autocmd("BufEnter", {
+			pattern = "copilot-*",
+			callback = function()
+				vim.opt_local.relativenumber = false
+				vim.opt_local.number = false
+				vim.opt_local.conceallevel = 0
+			end,
+		})
+		
+		-- Ensure wrap stays off when switching windows
+		vim.api.nvim_create_autocmd("WinEnter", {
+			callback = function()
+				local bufname = vim.api.nvim_buf_get_name(0)
+				if not bufname:match("copilot%-") then
+					vim.wo.wrap = false
+				end
+			end,
+		})
+	end,
 }
