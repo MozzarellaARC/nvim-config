@@ -8,7 +8,7 @@ return {
 			options = {
 				icons_enabled = true,
 				theme = kanagawa_paper,
-				component_separators = { left = "", right = "" },
+				component_separators = { left = "/", right = "/" },
 				section_separators = { left = "", right = "" },
 				disabled_filetypes = {
 					statusline = {},
@@ -45,7 +45,7 @@ return {
 						"filename",
 						file_status = true, -- Displays file status (readonly status, modified status)
 						newfile_status = false, -- Display new file status (new file means no write after created)
-						path = 2,
+						path = 3,
 						-- 0: Just the filename
 						-- 1: Relative path
 						-- 2: Absolute path
@@ -66,18 +66,18 @@ return {
 				lualine_y = {},
 				lualine_z = {},
 			},
-			inactive_sections = {
-				lualine_a = {},
-				lualine_b = {},
-				lualine_c = { "filename" },
-				lualine_x = { "location" },
-				lualine_y = {},
-				lualine_z = {},
-			},
-			tabline = {},
-			winbar = {},
-			inactive_winbar = {},
-			extensions = {},
+			-- inactive_sections = {
+			-- 	lualine_a = {},
+			-- 	lualine_b = {},
+			-- 	lualine_c = { "filename" },
+			-- 	lualine_x = { "location" },
+			-- 	lualine_y = {},
+			-- 	lualine_z = {},
+			-- },
+			-- tabline = {},
+			-- winbar = {},
+			-- inactive_winbar = {},
+			-- extensions = {},
 		})
 	end,
 }
