@@ -21,10 +21,23 @@ map("v", "<C-s>", "<Esc>:w<CR>") -- Save with Ctrl+s
 map("n", "<F4>", ":qa!<CR>") -- Exit Neovim
 map("v", "<C-c>", "y") -- Copy selection with Ctrl+c
 
--- Buffer navigation keybindings
 map("n", "<Tab>", ":wincmd w<CR>")
-map("n", "<C-S-Left>", "<Cmd>bprev<CR>") -- Go to previous buffer
-map("n", "<C-S-Right>", "<Cmd>bnext<CR>") -- Go to next buffer
+-- Buffer navigation keybindings (suppressed in diffview)
+map("n", "<C-S-Left>", function()
+	local ft = vim.bo.filetype
+	local diffview_fts = { "DiffviewFiles", "DiffviewFileHistory", "diff" }
+	if not vim.tbl_contains(diffview_fts, ft) then
+		vim.cmd("bprev")
+	end
+end) -- Go to previous buffer
+
+map("n", "<C-S-Right>", function()
+	local ft = vim.bo.filetype
+	local diffview_fts = { "DiffviewFiles", "DiffviewFileHistory", "diff" }
+	if not vim.tbl_contains(diffview_fts, ft) then
+		vim.cmd("bnext")
+	end
+end) -- Go to next buffer
 
 -- Indentation keybindings
 map("n", "<C-,>", "<<")
