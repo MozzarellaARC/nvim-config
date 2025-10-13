@@ -104,17 +104,14 @@ return {
 
 					-- Define the commands to display in a more compact format
 					local commands = {
-						"# Git Commands (Fugitive)                                                                                Press 'q' to close",
+						"# Git Commands (Fugitive)                                                                                 Press 'q' to close",
 						"",
-						":Git / :G                     - Open status                     :Git add <file> / % / .     - Stage file",
-						":Git reset <file>             - Unstage file                    :Gwrite / :Gread            - Stage / Checkout file",
-						":Git commit / --amend         - Commit changes                  :Git log                    - Show commit log",
-						":Git push                     - Push to remote                  :Git pull                   - Pull from remote",
-						":Git branch                   - List branches                   :Git checkout <branch>      - Switch branch",
-						":Git diff [--staged]          - Show unstaged / staged diffs    :Git mergetool              - Load merge conflicts",
-						":Git blame                    - Show blame window               :Ggrep <pattern>            - Git grep search",
-						":GMove <dest>  / :GRename     - Move / Rename file              :GDelete                   - Delete file (git rm)",
-						":Gedit <ref>                  - View any ref/blob               :                         -",
+						":Git / :G              - Open status       :Git add <f> / % / .- Stage file            :Git branch         - List branches",
+						":Git reset <file>      - Unstage file      :Gwrite / :Gread    - Stage / Checkout      :Git diff --staged  - Staged diff",
+						":Git commit / --amend  - Commit change     :Git log            - Show commit log       :Git blame          - Show blame",
+						":Git push              - Push to remote    :Git pull           - Pull from remote      :Ggrep <pattern>    - Git grep search",
+						":Git checkout <br>     - Switch branch     :Git mergetool      - Merge tool            :GMove :GRename     - Move / Rename",
+						":GDelete               - Untrack file      :Gedit <ref>        - View ref/blob",
 					}
 
 					vim.api.nvim_buf_set_lines(buf, 0, -1, false, commands)
