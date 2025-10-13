@@ -9,7 +9,7 @@ map({ "n", "v" }, "l", "<Nop>")
 map({ "n", "v" }, "Q", "<Nop>")
 
 ---General keybindings
-map("n", "z", "u") -- undo with ��Lz��L
+map("n", "z", "u") -- undo with z
 map("n", "<C-S-z>", "<C-r>") -- Redo with Shift+z
 
 map("n", "<C-s>", ":w<CR>") -- Save with Ctrl+s
@@ -18,24 +18,7 @@ map("v", "<C-s>", "<Esc>:w<CR>") -- Save with Ctrl+s
 
 map("v", "<C-c>", "y") -- Copy selection with Ctrl+c
 
-map({ "n", "v" }, "<Tab>", ":wincmd w<CR>")
-
--- Buffer navigation keybindings (suppressed in diffview)
-map("n", "<C-S-Left>", function()
-	local ft = vim.bo.filetype
-	local diffview_fts = { "DiffviewFiles", "DiffviewFileHistory", "diff" }
-	if not vim.tbl_contains(diffview_fts, ft) then
-		vim.cmd("BufferPrevious")
-	end
-end) -- Go to previous buffer
-
-map("n", "<C-S-Right>", function()
-	local ft = vim.bo.filetype
-	local diffview_fts = { "DiffviewFiles", "DiffviewFileHistory", "diff" }
-	if not vim.tbl_contains(diffview_fts, ft) then
-		vim.cmd("BufferNext")
-	end
-end) -- Go to next buffer
+map({ "n", "v" }, "<Tab>", ":wincmd w<CR>") -- Buffer Navigation
 
 -- Indentation keybindings
 map("n", "<C-,>", "<<")
@@ -57,20 +40,10 @@ map({ "n", "v" }, "<space><space>", "<Cmd>Yazi<CR>") -- Open yazi at current fil
 map("n", "<space>cw", "<Cmd>Yazi cwd<CR>") -- Open yazi in working directory
 
 -- Directory tree keybindings
-map("n", "<F1>", "<Cmd>Neotree toggle<CR>") -- Open yazi in current file
-map("v", "<F1>", "<Cmd>Neotree toggle<CR>") -- Open yazi in current file
-
--- Undotree
-map("n", "<F2>", function()
-	_G.undotree_toggle()
-end, { desc = "Toggle Undotree" }) -- Toggle undotree
-map("v", "<F2>", function()
-	_G.undotree_toggle()
-end, { desc = "Toggle Undotree" }) -- Toggle undotree
+map({ "n", "v" }, "<F1>", "<Cmd>Neotree toggle<CR>")
 
 -- Diagnostics
-map("n", "<F3>", "<cmd>Trouble diagnostics toggle<cr>")
-map("v", "<F3>", "<cmd>Trouble diagnostics toggle<cr>")
+map({ "n", "v" }, "<F3>", "<cmd>Trouble diagnostics toggle<cr>")
 
 -- Horizontal scrolling with Ctrl+MouseWheel
 map({ "n", "v" }, "<C-ScrollWheelUp>", "5zh")
@@ -84,6 +57,23 @@ map("i", "<C-ScrollWheelDown>", "<C-o>5zl")
 -- FUNCTIONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS
 -- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
 -- FUNCTIONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS
+
+-- Buffer navigation keybindings (suppressed in diffview)
+map("n", "<C-S-Left>", function()
+	local ft = vim.bo.filetype
+	local diffview_fts = { "DiffviewFiles", "DiffviewFileHistory", "diff" }
+	if not vim.tbl_contains(diffview_fts, ft) then
+		vim.cmd("BufferPrevious")
+	end
+end) -- Go to previous buffer
+
+map("n", "<C-S-Right>", function()
+	local ft = vim.bo.filetype
+	local diffview_fts = { "DiffviewFiles", "DiffviewFileHistory", "diff" }
+	if not vim.tbl_contains(diffview_fts, ft) then
+		vim.cmd("BufferNext")
+	end
+end) -- Go to next buffer
 
 -- Unified view state tracker
 _G.active_side_view = nil
@@ -141,48 +131,26 @@ _G.toggle_view = function(view_name, open_fn)
 	end
 end
 
--- Directory tree keybindings
-map("n", "<F1>", function()
-	_G.toggle_view("neotree", function()
-		vim.cmd("Neotree toggle")
-	end)
-end, { desc = "Toggle Neo-tree" })
-map("v", "<F1>", function()
+-- Neo-tree
+map({ "n", "v" }, "<F1>", function()
 	_G.toggle_view("neotree", function()
 		vim.cmd("Neotree toggle")
 	end)
 end, { desc = "Toggle Neo-tree" })
 
 -- Undotree
-map("n", "<F2>", function()
-	_G.toggle_view("undotree", function()
-		_G.undotree_toggle()
-	end)
-end, { desc = "Toggle Undotree" })
-map("v", "<F2>", function()
+map({ "n", "v" }, "<F2>", function()
 	_G.toggle_view("undotree", function()
 		_G.undotree_toggle()
 	end)
 end, { desc = "Toggle Undotree" })
 
-map("n", "<F3>", "<cmd>Trouble diagnostics toggle<cr>")
-map("v", "<F3>", "<cmd>Trouble diagnostics toggle<cr>")
-
--- Toggle function for Diffview
-map("n", "<F4>", function()
+-- Diffview
+map({ "n", "v" }, "<F4>", function()
 	_G.toggle_view("diffview", function()
 		vim.cmd("DiffviewFileHistory")
 	end)
 end, { desc = "Toggle Diffview" })
-
--- Copilot Chat (F5 is defined in copilot-chat.lua but uses the same system)
-
--- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
--- FUNCTIONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS
--- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
--- FUNCTIONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS
--- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
--- FUNCTIONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS
 
 -- Buffer deleteion Conditional
 map("n", "<C-w>", function()

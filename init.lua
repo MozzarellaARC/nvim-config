@@ -1,9 +1,12 @@
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/thesimonho/kanagawa-paper.nvim" },
+	{ src = "https://github.com/brenoprata10/nvim-highlight-colors" },
 })
 
-vim.cmd.colorscheme("kanagawa-paper")
+vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
+vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
 
 -- Set <space> as the leader key and important keymaps
 vim.g.mapleader = " "
