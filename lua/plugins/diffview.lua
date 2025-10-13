@@ -503,7 +503,7 @@ return {
 					},
 					{
 						"n",
-						"<2-LeftMouse>",
+						"<LeftRelease>",
 						actions.select_entry,
 						{ desc = "Open the diff for the selected entry" },
 					},
