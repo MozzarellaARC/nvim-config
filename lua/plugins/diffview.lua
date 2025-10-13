@@ -92,7 +92,55 @@ return {
 				DiffviewOpen = {},
 				DiffviewFileHistory = {},
 			},
-			hooks = {}, -- See |diffview-config-hooks|
+			hooks = {
+				view_opened = function()
+					-- Create a floating window with Fugitive commands
+					local buf = vim.api.nvim_create_buf(false, true)
+					vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
+					vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
+
+					-- Define the commands to display in a more compact format
+					local commands = {
+						"# Git Commands (Fugitive)                                                                                 Press 'q' to close",
+						"",
+						":Git add <file>  - Stage file          :Git commit           - Commit changes       :Git branch      - List branches",
+						":Git add %       - Stage current       :Git commit -m 'msg'  - Commit w/ message    :Git checkout    - Switch branch",
+						":Git add .       - Stage all           :Git commit --amend   - Amend commit         :Git push        - Push to remote",
+						":Git reset       - Unstage file        :Git diff             - Show changes         :Git pull        - Pull from remote",
+						":Git status      - Show status         :Git diff --staged    - Show staged          :Git log         - Show log",
+					}
+
+					vim.api.nvim_buf_set_lines(buf, 0, -1, false, commands)
+					vim.api.nvim_buf_set_option(buf, "modifiable", false)
+
+					-- Calculate window size
+					local ui = vim.api.nvim_list_uis()[1]
+					local win_width = ui.width
+					local win_height = ui.height
+					local width = math.floor(win_width * 0.9) -- 90% of screen width
+					local height = #commands
+
+					-- Window configuration
+					local opts = {
+						relative = "editor",
+						width = width,
+						height = height,
+						col = math.floor((win_width - width) / 2), -- Center horizontally
+						row = win_height - height - 3, -- Position at bottom
+						style = "minimal",
+						border = { " ", " ", " ", " ", " ", " ", " ", " " },
+						title = " Fugitive Commands ",
+						title_pos = "center",
+					}
+
+					local win = vim.api.nvim_open_win(buf, false, opts)
+					vim.api.nvim_win_set_option(win, "winblend", 10)
+
+					-- Set up keymaps to close the window
+					vim.api.nvim_buf_set_keymap(buf, "n", "q", ":close<CR>", { noremap = true, silent = true })
+					vim.api.nvim_buf_set_keymap(buf, "n", "<Esc>", ":close<CR>", { noremap = true, silent = true })
+				end,
+			}, -- See |diffview-config-hooks|
 			keymaps = {
 				disable_defaults = false, -- Disable the default keymaps
 				view = {
