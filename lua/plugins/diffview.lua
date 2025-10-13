@@ -106,15 +106,15 @@ return {
 					local commands = {
 						"# Git Commands (Fugitive)                                                                                Press 'q' to close",
 						"",
-						":Git / :G           - Open status      :Gdiffsplit           - Diff staged/working  :Gread           - Checkout file (undo)",
-						":Git add <file>     - Stage file       :Gvdiffsplit          - Vertical diff        :Gwrite          - Stage file (git add)",
-						":Git add %          - Stage current    :Git diff             - Show unstaged diff   :GMove <dest>    - Move/rename file",
-						":Git add .          - Stage all        :Git diff --staged    - Show staged diff     :GRename <name>  - Rename file",
-						":Git reset <file>   - Unstage file     :Git blame            - Show blame window    :GDelete         - Delete file (git rm)",
-						":Git commit         - Commit changes   :Gedit <ref>          - View any ref/blob    :GBrowse         - Open in web browser",
-						":Git commit --amend - Amend commit     :Git log              - Show commit log      :Ggrep <pattern> - Git grep search",
-						":Git push           - Push to remote   :Git branch           - List branches        :Git mergetool   - Load merge conflicts",
-						":Git pull           - Pull from remote :Git checkout <br>    - Switch branch        :Git rebase -i   - Interactive rebase",
+						":Git / :G                     - Open status                     :Git add <file> / % / .     - Stage file",
+						":Git reset <file>             - Unstage file                    :Gwrite / :Gread            - Stage / Checkout file",
+						":Git commit / --amend         - Commit changes                  :Git log                    - Show commit log",
+						":Git push                     - Push to remote                  :Git pull                   - Pull from remote",
+						":Git branch                   - List branches                   :Git checkout <branch>      - Switch branch",
+						":Git diff [--staged]          - Show unstaged / staged diffs    :Git mergetool              - Load merge conflicts",
+						":Git blame                    - Show blame window               :Ggrep <pattern>            - Git grep search",
+						":GMove <dest>  / :GRename     - Move / Rename file              :GDelete                   - Delete file (git rm)",
+						":Gedit <ref>                  - View any ref/blob               :                         -",
 					}
 
 					vim.api.nvim_buf_set_lines(buf, 0, -1, false, commands)
