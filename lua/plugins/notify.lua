@@ -5,17 +5,7 @@ return {
 			local notify = require("notify")
 
 			-- Icon configuration - customize these to your preference
-			local icons = {
-				save = "💾",
-				directory = "📁",
-				rename = "✏️",
-				create = "📄",
-				delete = "🗑️",
-				copy = "📋",
-				move = "🚚",
-				success = "✅",
-				error = "❌",
-			}
+			-- local icons = {}
 
 			-- Function to wrap long text with manual line breaks
 			local function wrap_text(text, max_width)
