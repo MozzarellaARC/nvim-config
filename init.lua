@@ -51,9 +51,23 @@ require("config.keymap")
 
 -- Highlight matching pairs with a block background so the characters stay readable
 vim.api.nvim_set_hl(0, "MatchParen", {
-	bg = "#D7D6CE",
-	fg = vim.api.nvim_get_hl(0, { name = "Visual", link = false }).bg,
+	bg = "#3A3A4B",
+	fg = "#fff2cc",
 	bold = true,
+})
+
+-- Disable LSP semantic highlights
+vim.api.nvim_create_autocmd("LspAttach", {
+	desc = "Disable LSP semantic highlights",
+	callback = function(event)
+		local id = vim.tbl_get(event, "data", "client_id")
+		local client = id and vim.lsp.get_client_by_id(id)
+		if client == nil then
+			return
+		end
+
+		client.server_capabilities.semanticTokensProvider = nil
+	end,
 })
 
 -- Inline Diagnostics
