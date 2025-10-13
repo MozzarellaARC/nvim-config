@@ -96,7 +96,7 @@ return {
 				view_opened = function()
 					-- Hide lualine
 					vim.opt.laststatus = 0
-					
+
 					-- Create a floating window with Fugitive commands
 					local buf = vim.api.nvim_create_buf(false, true)
 					vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
@@ -104,13 +104,17 @@ return {
 
 					-- Define the commands to display in a more compact format
 					local commands = {
-						"# Git Commands (Fugitive)                                                                                 Press 'q' to close",
+						"# Git Commands (Fugitive)                                                                                Press 'q' to close",
 						"",
-						":Git add <file>  - Stage file          :Git commit           - Commit changes       :Git branch      - List branches",
-						":Git add %       - Stage current       :Git commit -m 'msg'  - Commit w/ message    :Git checkout    - Switch branch",
-						":Git add .       - Stage all           :Git commit --amend   - Amend commit         :Git push        - Push to remote",
-						":Git reset       - Unstage file        :Git diff             - Show changes         :Git pull        - Pull from remote",
-						":Git status      - Show status         :Git diff --staged    - Show staged          :Git log         - Show log",
+						":Git / :G           - Open status      :Gdiffsplit           - Diff staged/working  :Gread           - Checkout file (undo)",
+						":Git add <file>     - Stage file       :Gvdiffsplit          - Vertical diff        :Gwrite          - Stage file (git add)",
+						":Git add %          - Stage current    :Git diff             - Show unstaged diff   :GMove <dest>    - Move/rename file",
+						":Git add .          - Stage all        :Git diff --staged    - Show staged diff     :GRename <name>  - Rename file",
+						":Git reset <file>   - Unstage file     :Git blame            - Show blame window    :GDelete         - Delete file (git rm)",
+						":Git commit         - Commit changes   :Gedit <ref>          - View any ref/blob    :GBrowse         - Open in web browser",
+						":Git commit --amend - Amend commit     :Git log              - Show commit log      :Ggrep <pattern> - Git grep search",
+						":Git push           - Push to remote   :Git branch           - List branches        :Git mergetool   - Load merge conflicts",
+						":Git pull           - Pull from remote :Git checkout <br>    - Switch branch        :Git rebase -i   - Interactive rebase",
 					}
 
 					vim.api.nvim_buf_set_lines(buf, 0, -1, false, commands)
