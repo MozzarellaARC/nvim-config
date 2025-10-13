@@ -36,6 +36,9 @@ vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.cindent = true -- Indentation style for C-like languages
 vim.opt.number = true -- Show absolute line numbers
 
+-- Cursor
+vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250"
+
 -- Gutter/Sign Column
 -- vim.opt.signcolumn = "yes" -- Always show sign column to prevent text shifting
 -- vim.opt.numberwidth = 4 -- Width of the number column
