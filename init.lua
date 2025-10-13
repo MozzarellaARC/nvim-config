@@ -1,6 +1,5 @@
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
-	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/thesimonho/kanagawa-paper.nvim" },
 	{ src = "https://github.com/brenoprata10/nvim-highlight-colors" },
 })
@@ -22,7 +21,23 @@ vim.lsp.enable("lua_ls")
 vim.lsp.enable("pwsh")
 vim.lsp.enable("copilot")
 vim.lsp.enable("pyright")
-vim.lsp.inline_completion.enable()
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local bufnr = args.buf
+		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+
+		if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, bufnr) then
+			vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
+			vim.keymap.set(
+				"i",
+				"<Tab>",
+				vim.lsp.inline_completion.get,
+				{ desc = "LSP: accept inline completion", buffer = bufnr }
+			)
+		end
+	end,
+})
 
 -- Provider
 vim.g.python3_host_prog = "C:/Users/M/scoop/shims/python313.exe"
@@ -56,7 +71,6 @@ vim.opt.clipboard = "unnamedplus"
 
 -- Package Manager
 require("config.lazy")
-
 -- Key Remap
 require("config.keymap")
 

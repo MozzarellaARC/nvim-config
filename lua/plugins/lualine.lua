@@ -1,5 +1,3 @@
-local kanagawa_paper = require("lualine.themes.kanagawa-paper-ink")
-
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -7,7 +5,7 @@ return {
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
-				theme = kanagawa_paper,
+				theme = "auto",
 				component_separators = { left = "/", right = "/" },
 				section_separators = { left = "", right = "" },
 				disabled_filetypes = {
@@ -62,7 +60,14 @@ return {
 						},
 					},
 				},
-				lualine_x = { "encoding", "fileformat", "filetype" },
+				lualine_x = {
+					{ "encoding", show_bomb = true },
+					{
+						"datetime",
+						-- options: default, us, uk, iso, or your own format string ("%H:%M", etc..)
+						style = "%B %m | %H:%M",
+					},
+				},
 				lualine_y = {},
 				lualine_z = {},
 			},
