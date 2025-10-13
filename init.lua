@@ -62,6 +62,20 @@ vim.api.nvim_create_autocmd("CursorHold", {
 	end,
 })
 
+vim.opt.autoread = true
+
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+	pattern = "*",
+	command = "checktime",
+})
+
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+	pattern = "*",
+	callback = function()
+		vim.notify("File changed on disk. Buffer reloaded.", vim.log.levels.WARN)
+	end,
+})
+
 -- Set updatetime for CursorHold (default is 4000ms, this makes it faster)
 vim.opt.updatetime = 500
 
