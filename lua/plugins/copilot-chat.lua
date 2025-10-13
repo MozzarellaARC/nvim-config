@@ -7,7 +7,7 @@ return {
 	opts = {
 		model = "gpt-4.1", -- AI model to use
 		temperature = 0.1, -- Lower = focused, higher = creative
-		
+
 		window = {
 			layout = "vertical", -- 'vertical' = right side, 'horizontal' = bottom, 'float' = floating
 			width = 0.5, -- 50% of screen width
@@ -26,13 +26,13 @@ return {
 		auto_insert_mode = false, -- Don't enter insert mode when opening
 		auto_fold = false, -- Automatically folds non-assistant messages
 	},
-	
+
 	-- Auto-command to customize chat buffer behavior
 	config = function(_, opts)
 		require("CopilotChat").setup(opts)
-		
+
 		-- Keymap to toggle chat with F5 using unified view system
-		vim.keymap.set('n', '<F5>', function()
+		vim.keymap.set({ "n", "v" }, "<F5>", function()
 			-- Use the global toggle_view function if available
 			if _G.toggle_view then
 				_G.toggle_view("copilot", function()
@@ -58,8 +58,8 @@ return {
 					_G.active_side_view = "copilot"
 				end
 			end
-		end, { desc = 'Toggle Copilot Chat', silent = true })
-		
+		end, { desc = "Toggle Copilot Chat", silent = true })
+
 		vim.api.nvim_create_autocmd("BufEnter", {
 			pattern = "copilot-*",
 			callback = function()
@@ -68,7 +68,7 @@ return {
 				vim.opt_local.conceallevel = 0
 			end,
 		})
-		
+
 		-- Ensure wrap stays off when switching windows
 		vim.api.nvim_create_autocmd("WinEnter", {
 			callback = function()

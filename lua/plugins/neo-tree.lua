@@ -20,8 +20,8 @@ return {
 			-- "document_symbols",
 		},
 		add_blank_line_at_top = false, -- Add a blank line at the top of the tree.
-		auto_clean_after_session_restore = false, -- Automatically clean up broken neo-tree buffers saved in sessions
-		close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+		auto_clean_after_session_restore = true, -- Automatically clean up broken neo-tree buffers saved in sessions
+		close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 		default_source = "filesystem", -- you can choose a specific source `last` here which indicates the last used source
 		enable_diagnostics = true,
 		enable_git_status = true,
@@ -227,7 +227,7 @@ return {
 			--},
 			indent = {
 				indent_size = 2,
-				padding = 1,
+				padding = 0, -- Changed from 1 to 0
 				-- indent guides
 				with_markers = true,
 				indent_marker = "│",
@@ -235,8 +235,8 @@ return {
 				highlight = "NeoTreeIndentMarker",
 				-- expander config, needed for nesting files
 				with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
-				expander_collapsed = "",
-				expander_expanded = "",
+				expander_collapsed = "",
+				expander_expanded = "",
 				expander_highlight = "NeoTreeExpander",
 			},
 			icon = {
@@ -356,29 +356,17 @@ return {
 			file = {
 				{ "indent" },
 				{ "icon" },
-				{
-					"container",
-					content = {
-						{
-							"name",
-							zindex = 10,
-						},
-						{
-							"symlink_target",
-							zindex = 10,
-							highlight = "NeoTreeSymbolicLinkTarget",
-						},
-						{ "clipboard", zindex = 10 },
-						{ "bufnr", zindex = 10 },
-						{ "modified", zindex = 20, align = "right" },
-						{ "diagnostics", zindex = 20, align = "right" },
-						{ "git_status", zindex = 10, align = "right" },
-						{ "file_size", zindex = 10, align = "right" },
-						{ "type", zindex = 10, align = "right" },
-						{ "last_modified", zindex = 10, align = "right" },
-						{ "created", zindex = 10, align = "right" },
-					},
-				},
+				{ "name", use_git_status_colors = true, zindex = 10 },
+				{ "symlink_target", zindex = 10, highlight = "NeoTreeSymbolicLinkTarget" },
+				{ "clipboard", zindex = 10 },
+				{ "bufnr", zindex = 10 },
+				{ "modified", zindex = 20, align = "right" },
+				{ "diagnostics", zindex = 20, align = "right" },
+				{ "git_status", zindex = 10, align = "right" },
+				{ "file_size", zindex = 10, align = "right" },
+				{ "type", zindex = 10, align = "right" },
+				{ "last_modified", zindex = 10, align = "right" },
+				{ "created", zindex = 10, align = "right" },
 			},
 			message = {
 				{ "indent", with_markers = false },
@@ -440,7 +428,12 @@ return {
 					nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
 				},
 				["<LeftRelease>"] = "open",
-				["<cr>"] = "open",
+				["<cr>"] = {
+					"open",
+					config = {
+						keep_focus = true, -- Keep focus in neo-tree after opening
+					},
+				},
 				-- ["<cr>"] = { "open", config = { expand_nested_files = true } }, -- expand nested file takes precedence
 				["<esc>"] = "cancel", -- close preview or floating neo-tree window
 				["P"] = {
@@ -498,6 +491,7 @@ return {
 		},
 		filesystem = {
 			window = {
+				-- position = "float",
 				mappings = {
 					["H"] = "toggle_hidden",
 					["/"] = "fuzzy_finder",
@@ -634,11 +628,11 @@ return {
 			group_empty_dirs = false, -- when true, empty folders will be grouped together
 			search_limit = 50, -- max number of search results when using filters
 			follow_current_file = {
-				enabled = false, -- This will find and focus the file in the active buffer every time
+				enabled = true, -- This will find and focus the file in the active buffer every time
 				--               -- the current file is changed while the tree is open.
 				leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
 			},
-			hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
+			hijack_netrw_behavior = "disabled", -- netrw disabled, opening a directory opens neo-tree
 			-- in whatever position is specified in window.position
 			-- "open_current",-- netrw disabled, opening a directory opens within the
 			-- window like netrw would, regardless of window.position
