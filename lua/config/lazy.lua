@@ -22,8 +22,40 @@ require("lazy").setup({
 		{ import = "plugins" },
 	},
 	-- Configure any other settings here. See the documentation for more details.
-	-- colorscheme that will be used when installing plugins.
-	install = { colorscheme = { "kanagawa-papaer-ink" } },
 	-- automatically check for plugin updates
-	checker = { enabled = true },
+	checker = {
+		-- automatically check for plugin updates
+		enabled = true,
+		concurrency = nil, ---@type number? set to 1 to check for updates very slowly
+		notify = false, -- get a notification when new updates are found
+		frequency = 3600, -- check for updates every hour
+		check_pinned = false, -- check for pinned packages that can't be updated
+	},
+	change_detection = {
+		-- automatically check for config file changes and reload the ui
+		enabled = false,
+		notify = false, -- get a notification when changes are found
+	},
+	performance = {
+		cache = {
+			enabled = true,
+		},
+		-- reset_packpath = true, -- reset the package path to improve startup time
+		-- rtp = {
+		-- 	reset = true, -- reset the runtime path to $VIMRUNTIME and your config directory
+		-- 	---@type string[]
+		-- 	paths = {}, -- add any custom paths here that you want to includes in the rtp
+		-- 	---@type string[] list any plugins you want to disable here
+		-- 	disabled_plugins = {
+		-- 		-- "gzip",
+		-- 		-- "matchit",
+		-- 		-- "matchparen",
+		-- 		-- "netrwPlugin",
+		-- 		-- "tarPlugin",
+		-- 		-- "tohtml",
+		-- 		-- "tutor",
+		-- 		-- "zipPlugin",
+		-- 	},
+		-- },
+	},
 })

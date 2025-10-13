@@ -1,11 +1,9 @@
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
-	{ src = "https://github.com/mason-org/mason.nvim" },
-	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+	{ src = "https://github.com/thesimonho/kanagawa-paper.nvim" },
 })
 
-require("mason").setup()
-require("mason-lspconfig").setup()
+vim.cmd.colorscheme("kanagawa-paper")
 
 -- Set <space> as the leader key and important keymaps
 vim.g.mapleader = " "
@@ -20,6 +18,7 @@ vim.opt.swapfile = false
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("pwsh")
 vim.lsp.enable("copilot")
+vim.lsp.enable("pyright")
 vim.lsp.inline_completion.enable()
 
 -- Provider
@@ -46,6 +45,7 @@ vim.opt.clipboard = "unnamedplus"
 
 -- Package Manager
 require("config.lazy")
+
 -- Key Remap
 require("config.keymap")
 
