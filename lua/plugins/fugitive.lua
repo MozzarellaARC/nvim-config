@@ -19,7 +19,7 @@ return {
 						local width = math.floor(vim.o.columns * 0.8)
 						local height = math.floor(vim.o.lines * 0.8)
 						local col = math.floor((vim.o.columns - width) / 2)
-						local row = math.floor((vim.o.lines - height) / 2)
+						local row = math.floor((vim.o.lines - height) / 2 - 1)
 
 						-- Create floating window
 						local float_win = vim.api.nvim_open_win(buf, true, {
@@ -31,14 +31,10 @@ return {
 							style = "minimal",
 							border = "solid",
 						})
-
 						-- Close the original window if it's not the only one
 						if #vim.api.nvim_list_wins() > 1 then
 							vim.api.nvim_win_close(win, true)
 						end
-
-						-- Add keymap to close floating window with 'q'
-						vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = buf, silent = true })
 					end
 				end
 			end,
