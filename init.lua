@@ -62,13 +62,12 @@ vim.api.nvim_create_autocmd("CursorHold", {
 	end,
 })
 
+-- Auto-reload files changed outside of Neovim
 vim.opt.autoread = true
-
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
 	pattern = "*",
 	command = "checktime",
 })
-
 vim.api.nvim_create_autocmd("FileChangedShellPost", {
 	pattern = "*",
 	callback = function()
