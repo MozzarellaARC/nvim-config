@@ -52,6 +52,12 @@ return {
 			local original_notify = notify
 			local function wrapped_notify(message, level, opts)
 				opts = opts or {}
+				
+				-- Suppress barbar notifications
+				if opts.title and type(opts.title) == "string" and opts.title:match("barbar") then
+					return
+				end
+				
 				local max_width = opts.max_width or 70 -- Default wrap width
 				local wrapped_message = wrap_text(tostring(message), max_width)
 				return original_notify(wrapped_message, level, opts)
