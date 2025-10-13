@@ -122,7 +122,7 @@ return {
 				open_or_preview = function(state)
 					local node = state.tree:get_node()
 					if node.type == "directory" then
-						require("neo-tree.sources.common.commands").toggle_node(state)
+						state.commands.toggle_node(state)
 					elseif node.type == "file" then
 						require("neo-tree.sources.common.commands").toggle_preview(state, {
 							use_float = false,
@@ -141,10 +141,9 @@ return {
 				},
 				mappings = {
 					["<LeftRelease>"] = {
-						"toggle_node",
+						"open_or_preview",
 						nowait = true, -- disable `nowait` if you have existing combos starting with this char that you want to use
 					},
-					-- ["<LeftRelease>"] = "open_or_preview",
 					["<cr>"] = "open",
 					["<esc>"] = "cancel", -- close preview or floating neo-tree window
 					-- Read `# Preview Mode` for more information
