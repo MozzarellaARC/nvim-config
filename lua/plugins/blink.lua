@@ -23,8 +23,25 @@ return {
 		-- C-e: Hide menu
 		-- C-k: Toggle signature help (if signature.enabled = true)
 		--
-		-- See :h blink-cmp-config-keymap for defining your own keymap
-		keymap = { preset = "default" },
+		-- See :h blink-cmp-config-keymap for defining your own keymap\
+		keymap = {
+			preset = "default",
+			["<Tab>"] = {
+				function(cmp)
+					-- Accept ghost text if available
+					if cmp.snippet_active() then
+						return cmp.accept()
+					end
+					-- Accept completion if menu is visible and item is selected
+					if cmp.is_visible() and cmp.get_selected_item() then
+						return cmp.accept()
+					end
+					-- Otherwise insert tab
+					return false
+				end,
+				"fallback",
+			},
+		},
 
 		appearance = {
 			-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
