@@ -1,5 +1,6 @@
 vim.lsp.config("pyright", {
 	cmd = { "pyright-langserver", "--stdio" },
+	filetypes = { ".py" },
 	root_marers = {
 		"pyproject.toml",
 		"setup.py",
@@ -10,14 +11,14 @@ vim.lsp.config("pyright", {
 		".git",
 	},
 	settings = {
-		python = {
-			analysis = {
-				-- Ignore specific modules like bpy
-				ignore = { "bpy" },
-				-- Optionally suppress stub warnings
-				reportMissingTypeStubs = "none",
+		{
+			python = {
+				analysis = {
+					autoSearchPaths = true,
+					diagnosticMode = "openFilesOnly",
+					useLibraryCodeForTypes = true,
+				},
 			},
 		},
 	},
-
 })

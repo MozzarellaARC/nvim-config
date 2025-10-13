@@ -1,6 +1,11 @@
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/mason-org/mason.nvim" },
+	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 })
+
+require("mason").setup()
+require("mason-lspconfig").setup()
 
 -- Set <space> as the leader key and important keymaps
 vim.g.mapleader = " "
@@ -45,9 +50,8 @@ require("config.lazy")
 require("config.keymap")
 
 -- Highlight matching pairs with a block background so the characters stay readable
-local visual_hl = vim.api.nvim_get_hl(0, { name = "Visual", link = false })
 vim.api.nvim_set_hl(0, "MatchParen", {
 	bg = "#D7D6CE",
-	fg = visual_hl.bg,
+	fg = vim.api.nvim_get_hl(0, { name = "Visual", link = false }).bg,
 	bold = true,
 })

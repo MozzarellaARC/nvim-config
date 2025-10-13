@@ -4,6 +4,14 @@
       "rev": "b0c4d7c",
       "src": "https://github.com/thesimonho/kanagawa-paper.nvim"
     },
+    "mason-lspconfig.nvim": {
+      "rev": "6bdb14f",
+      "src": "https://github.com/mason-org/mason-lspconfig.nvim"
+    },
+    "mason.nvim": {
+      "rev": "ad7146a",
+      "src": "https://github.com/mason-org/mason.nvim"
+    },
     "nvim-lspconfig": {
       "rev": "ac98db2",
       "src": "https://github.com/neovim/nvim-lspconfig"
