@@ -116,21 +116,16 @@ require("config.lazy")
 -- Key Remap
 require("config.keymap")
 
----@diagnostic disable-next-line: undefined-global
-local api = vim.api
-
 -- Highlight matching pairs with a block background so the characters stay readable
 local function set_matchparen_highlight()
-	local visual_hl = api.nvim_get_hl(0, { name = "Visual", link = false })
-	api.nvim_set_hl(0, "MatchParen", {
-		bg = visual_hl.bg or "#3b4261",
-		fg = visual_hl.fg,
+	local visual_hl = vim.api.nvim_get_hl(0, { name = "Visual", link = false })
+	vim.api.nvim_set_hl(0, "MatchParen", {
+		bg = "#D7D6CE",
+		fg = visual_hl.bg,
 		bold = true,
 	})
 end
-
 set_matchparen_highlight()
-
-api.nvim_create_autocmd("ColorScheme", {
+vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = set_matchparen_highlight,
 })
