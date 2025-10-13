@@ -94,6 +94,9 @@ return {
 			},
 			hooks = {
 				view_opened = function()
+					-- Hide lualine
+					vim.opt.laststatus = 0
+					
 					-- Create a floating window with Fugitive commands
 					local buf = vim.api.nvim_create_buf(false, true)
 					vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
@@ -139,6 +142,10 @@ return {
 					-- Set up keymaps to close the window
 					vim.api.nvim_buf_set_keymap(buf, "n", "q", ":close<CR>", { noremap = true, silent = true })
 					vim.api.nvim_buf_set_keymap(buf, "n", "<Esc>", ":close<CR>", { noremap = true, silent = true })
+				end,
+				view_closed = function()
+					-- Restore lualine
+					vim.opt.laststatus = 3
 				end,
 			}, -- See |diffview-config-hooks|
 			keymaps = {
