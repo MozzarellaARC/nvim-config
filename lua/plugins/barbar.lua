@@ -32,6 +32,7 @@ return {
 				"diffpanel_2",
 				"diffpanel_3",
 				"help",
+				"git_status",
 			},
 			exclude_name = {
 				"undotree_0",
@@ -43,6 +44,7 @@ return {
 				"diffpanel_2",
 				"diffpanel_3",
 				"help",
+				"git_status",
 			},
 
 			-- A buffer to this direction will be focused (if it exists) when closing the current buffer.
