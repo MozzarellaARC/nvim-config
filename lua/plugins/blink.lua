@@ -1,3 +1,5 @@
+---@module 'blink.cmp'
+
 return {
 	"saghen/blink.cmp",
 	-- optional: provides snippets for the snippet source
@@ -50,7 +52,7 @@ return {
 		},
 		completion = {
 			-- Only show the documentation popup when manually triggered
-			documentation = { auto_show = false },
+			documentation = { auto_show = true },
 			ghost_text = {
 				enabled = true,
 				show_with_menu = true,
@@ -59,7 +61,8 @@ return {
 			menu = {
 				draw = {
 					columns = {
-						{ "label", "label_description", gap = 1 },
+						{ "label", "label_description", gap = 2 },
+						{ "source_name" },
 						{ "kind_icon" },
 					},
 				},
