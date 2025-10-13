@@ -26,6 +26,7 @@ return {
 		-- C-k: Toggle signature help (if signature.enabled = true)
 		--
 		-- See :h blink-cmp-config-keymap for defining your own keymap\
+		signature = { enabled = true },
 		keymap = {
 			preset = "default",
 			["<Tab>"] = {
@@ -52,7 +53,7 @@ return {
 		},
 		completion = {
 			-- Only show the documentation popup when manually triggered
-			documentation = { auto_show = true },
+			documentation = { auto_show = false },
 			ghost_text = {
 				enabled = true,
 				show_with_menu = true,

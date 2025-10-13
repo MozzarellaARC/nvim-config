@@ -55,3 +55,37 @@ vim.api.nvim_set_hl(0, "MatchParen", {
 	fg = vim.api.nvim_get_hl(0, { name = "Visual", link = false }).bg,
 	bold = true,
 })
+
+-- Inline Diagnostics
+vim.diagnostic.config({
+	underline = false,
+	virtual_text = {
+		spacing = 1,
+		prefix = "●",
+	},
+	update_in_insert = false,
+	severity_sort = true,
+	signs = {
+		text = {
+			-- Alas nerdfont icons don't render properly on Medium!
+			[vim.diagnostic.severity.ERROR] = " ",
+			[vim.diagnostic.severity.WARN] = " ",
+			[vim.diagnostic.severity.HINT] = " ",
+			[vim.diagnostic.severity.INFO] = " ",
+		},
+	},
+})
+
+-- Float Diagnostics
+vim.opt.updatetime = 250
+vim.api.nvim_create_autocmd("CursorHold", {
+	callback = function()
+		vim.diagnostic.open_float(nil, {
+			focusable = true,
+			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+			border = "solid",
+			scope = "cursor",
+			source = "always",
+		})
+	end,
+})
