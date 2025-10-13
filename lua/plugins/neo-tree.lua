@@ -1,3 +1,6 @@
+---@diagnostic disable-next-line: undefined-global
+local vim = vim
+
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v3.x",
@@ -8,8 +11,14 @@ return {
 	},
 	lazy = false, -- neo-tree will lazily load itself
 	config = function()
+		local common_commands = require("neo-tree.sources.common.commands")
+		local preview = require("neo-tree.sources.common.preview")
+		local preview_opts = {
+			use_float = true,
+			use_snacks_image = true,
+			use_image_nvim = true,
+		}
 		---@module 'neo-tree'
-		---@type neotree.Config
 		require("neo-tree").setup({
 			close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 			popup_border_style = "", -- or "" to use 'winborder' on Neovim v0.11+
@@ -118,20 +127,7 @@ return {
 			-- A list of functions, each representing a global custom command
 			-- that will be available in all sources (if not overridden in `opts[source_name].commands`)
 			-- see `:h neo-tree-custom-commands-global`
-			commands = {
-				buffer_navigation = function(state)
-					local node = state.tree:get_node()
-					if node.type == "directory" then
-						state.commands.toggle_node(state)
-					elseif node.type == "file" then
-						require("neo-tree.sources.common.commands").toggle_preview(state, {
-							use_float = false,
-							use_snacks_image = true,
-							use_image_nvim = true,
-						})
-					end
-				end,
-			},
+			commands = {},
 			window = {
 				position = "left",
 				width = 40,
@@ -239,7 +235,7 @@ return {
 					},
 				},
 				follow_current_file = {
-					enabled = false, -- This will find and focus the file in the active buffer every time
+					enabled = true, -- This will find and focus the file in the active buffer every time
 					--               -- the current file is changed while the tree is open.
 					leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
 				},
@@ -302,7 +298,23 @@ return {
 					},
 				},
 
-				commands = {}, -- Add a custom command or override a global one using the same function name
+				commands = {
+					buffer_navigation = function(state)
+						local node = state.tree:get_node()
+						if not node then
+							return
+						end
+						if node.type == "directory" then
+							state.commands.toggle_node(state)
+							return
+						end
+
+						local original_preview = state.config.preview
+						state.config.preview = vim.tbl_deep_extend("force", {}, original_preview or {}, preview_opts)
+						common_commands.preview(state)
+						state.config.preview = original_preview
+					end,
+				}, -- Add a custom command or override a global one using the same function name
 			},
 			buffers = {
 				follow_current_file = {
