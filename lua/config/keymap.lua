@@ -15,10 +15,7 @@ map("n", "<C-S-z>", "<C-r>") -- Redo with Shift+z
 map("n", "<C-s>", ":w<CR>") -- Save with Ctrl+s
 map("i", "<C-s>", "<Esc>:w<CR>") -- Save with Ctrl+s
 map("v", "<C-s>", "<Esc>:w<CR>") -- Save with Ctrl+s
--- map('n', '<C-S>s', ':wa<CR>') -- Save all buffers with Ctrl+Alt+s If this is turned on, it will gives delays to the Ctrl+s keybinding
 
--- Terminals
-map("n", "<F4>", ":qa!<CR>") -- Exit Neovim
 map("v", "<C-c>", "y") -- Copy selection with Ctrl+c
 
 map("n", "<Tab>", ":wincmd w<CR>")

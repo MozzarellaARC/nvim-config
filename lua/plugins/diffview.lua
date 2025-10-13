@@ -99,8 +99,8 @@ return {
 
 					-- Create a floating window with Fugitive commands
 					local buf = vim.api.nvim_create_buf(false, true)
-					vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
-					vim.api.nvim_buf_set_option(buf, "filetype", "markdown")
+					vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf })
+					vim.api.nvim_set_option_value("filetype", "markdown", { buf = buf })
 
 					-- Define the commands to display in a more compact format
 					local commands = {
@@ -115,7 +115,7 @@ return {
 					}
 
 					vim.api.nvim_buf_set_lines(buf, 0, -1, false, commands)
-					vim.api.nvim_buf_set_option(buf, "modifiable", false)
+					vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
 
 					-- Calculate window size
 					local ui = vim.api.nvim_list_uis()[1]
@@ -138,11 +138,11 @@ return {
 					}
 
 					local win = vim.api.nvim_open_win(buf, false, opts)
-					vim.api.nvim_win_set_option(win, "winblend", 10)
+					vim.api.nvim_set_option_value("winblend", 10, { win = win })
 
 					-- Set up keymaps to close the window
-					vim.api.nvim_buf_set_keymap(buf, "n", "q", ":close<CR>", { noremap = true, silent = true })
-					vim.api.nvim_buf_set_keymap(buf, "n", "<Esc>", ":close<CR>", { noremap = true, silent = true })
+					vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = buf, noremap = true, silent = true })
+					vim.keymap.set("n", "<Esc>", "<cmd>close<CR>", { buffer = buf, noremap = true, silent = true })
 				end,
 				view_closed = function()
 					-- Restore lualine
