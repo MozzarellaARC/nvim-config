@@ -1,5 +1,5 @@
 return {
-	"ewis6991/gitsigns.nvim",
+	"lewis6991/gitsigns.nvim",
 	lazy = false,
 	signs = {
 		add = { text = "┃" },
