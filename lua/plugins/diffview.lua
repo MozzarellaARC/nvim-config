@@ -104,8 +104,6 @@ return {
 
 					-- Define the commands to display in a more compact format
 					local commands = {
-						"# Git Commands (Fugitive)                                                                                 Press 'q' to close",
-						"",
 						":Git / :G              - Open status       :Git add <f> / % / .- Stage file            :Git branch         - List branches",
 						":Git reset <file>      - Unstage file      :Gwrite / :Gread    - Stage / Checkout      :Git diff --staged  - Staged diff",
 						":Git commit / --amend  - Commit change     :Git log            - Show commit log       :Git blame          - Show blame",
@@ -130,10 +128,10 @@ return {
 						width = width,
 						height = height,
 						col = math.floor((win_width - width) / 2), -- Center horizontally
-						row = win_height - height - 3, -- Position at bottom
+						row = win_height - height - 4, -- Position at bottom
 						style = "minimal",
 						border = { " ", " ", " ", " ", " ", " ", " ", " " },
-						title = " Fugitive Commands ",
+						title = " ",
 						title_pos = "center",
 					}
 

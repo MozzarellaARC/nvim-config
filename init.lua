@@ -6,6 +6,7 @@ vim.pack.add({
 
 vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
 vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
+vim.wo.wrap = false
 
 -- Set <space> as the leader key and important keymaps
 vim.g.mapleader = " "
