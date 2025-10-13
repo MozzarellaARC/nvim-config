@@ -119,7 +119,7 @@ return {
 			-- that will be available in all sources (if not overridden in `opts[source_name].commands`)
 			-- see `:h neo-tree-custom-commands-global`
 			commands = {
-				open_or_preview = function(state)
+				buffer_navigation = function(state)
 					local node = state.tree:get_node()
 					if node.type == "directory" then
 						state.commands.toggle_node(state)
@@ -141,7 +141,7 @@ return {
 				},
 				mappings = {
 					["<LeftRelease>"] = {
-						"open_or_preview",
+						"buffer_navigation",
 						nowait = true, -- disable `nowait` if you have existing combos starting with this char that you want to use
 					},
 					["<cr>"] = "open",
