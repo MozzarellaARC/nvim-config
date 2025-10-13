@@ -18,7 +18,8 @@ map("v", "<C-s>", "<Esc>:w<CR>") -- Save with Ctrl+s
 
 map("v", "<C-c>", "y") -- Copy selection with Ctrl+c
 
-map("n", "<Tab>", ":wincmd w<CR>")
+map({ "n", "v" }, "<Tab>", ":wincmd w<CR>")
+
 -- Buffer navigation keybindings (suppressed in diffview)
 map("n", "<C-S-Left>", function()
 	local ft = vim.bo.filetype
