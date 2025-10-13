@@ -67,10 +67,15 @@ map("v", "<F2>", function()
 	_G.undotree_toggle()
 end, { desc = "Toggle Undotree" }) -- Toggle undotree
 
+-- Diagnostics
 map("n", "<F3>", "<cmd>Trouble diagnostics toggle<cr>")
 map("v", "<F3>", "<cmd>Trouble diagnostics toggle<cr>")
 
-map("n", "q", ":bd<CR>") -- Open symbols outline
+-- Horizontal scrolling with Ctrl+MouseWheel
+map({ "n", "v" }, "<C-ScrollWheelUp>", "5zh")
+map({ "n", "v" }, "<C-ScrollWheelDown>", "5zl")
+map("i", "<C-ScrollWheelUp>", "<C-o>5zh")
+map("i", "<C-ScrollWheelDown>", "<C-o>5zl")
 
 -- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
 -- FUNCTIONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS
@@ -171,8 +176,6 @@ end, { desc = "Toggle Diffview" })
 
 -- Copilot Chat (F5 is defined in copilot-chat.lua but uses the same system)
 
-map("n", "q", ":bd<CR>") -- Close buffer
-
 -- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
 -- FUNCTIONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS
 -- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
@@ -204,24 +207,11 @@ map("n", "<C-w>", function()
 	end
 end, { noremap = true, nowait = true })
 
--- Toggle function for Diffview
-map("n", "<F4>", function()
-	toggle_view("diffview", function()
-		vim.cmd("DiffviewFileHistory")
-	end)
-end, { desc = "Toggle Diffview" })
-
 -- Clear search on <Esc>
 map("n", "<Esc>", function()
 	vim.fn.setreg("/", "")
 	vim.cmd("nohlsearch")
 end)
-
--- Horizontal scrolling with Ctrl+MouseWheel
-map({ "n", "v" }, "<C-ScrollWheelUp>", "5zh")
-map({ "n", "v" }, "<C-ScrollWheelDown>", "5zl")
-map("i", "<C-ScrollWheelUp>", "<C-o>5zh")
-map("i", "<C-ScrollWheelDown>", "<C-o>5zl")
 
 -- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
 -- FUNCTIONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS
