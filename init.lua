@@ -111,19 +111,22 @@ vim.cmd([[
 ]])
 
 -- Float Diagnostics
+-- Diagnostics bufer content should be able to be selected and when the main buffer scrolls it should be able to stay in place,
+-- and when cursor or scrooling is very far and fast it should close automatically
 vim.opt.updatetime = 250
--- Manual keymap to open diagnostics (use <leader>d or customize)
-vim.keymap.set("n", "<LeftRelease>", function()
-	vim.diagnostic.open_float(nil, {
-		focusable = true,
-		close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-		border = "none",
-		scope = "cursor",
-		source = "always",
-	})
-end, { desc = "Show diagnostics" })
+vim.api.nvim_create_autocmd("CursorHold", {
+	callback = function()
+		vim.diagnostic.open_float(nil, {
+			focusable = true,
+			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+			border = "solid",
+			scope = "cursor",
+			source = "always",
+		})
+	end,
+})
 
--- Floating Window
+-- General Floating Window
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "fugitive", "git", "gitcommit", "conform", "ConformInfo" },
 	callback = function(args)
