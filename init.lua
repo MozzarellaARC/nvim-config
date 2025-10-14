@@ -112,18 +112,16 @@ vim.cmd([[
 
 -- Float Diagnostics
 vim.opt.updatetime = 250
-vim.api.nvim_create_autocmd("CursorHold", {
-	callback = function()
-		vim.diagnostic.open_float(nil, {
-			focusable = true,
-			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-			border = "none",
-			scope = "cursor",
-			position = "line",
-			source = "always",
-		})
-	end,
-})
+-- Manual keymap to open diagnostics (use <leader>d or customize)
+vim.keymap.set("n", "<LeftRelease>", function()
+	vim.diagnostic.open_float(nil, {
+		focusable = true,
+		close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+		border = "none",
+		scope = "cursor",
+		source = "always",
+	})
+end, { desc = "Show diagnostics" })
 
 -- Floating Window
 vim.api.nvim_create_autocmd("FileType", {
