@@ -29,26 +29,26 @@ return {
 			end,
 		})
 
-		----------------------------------------------------------------
-		-- Git helpers
-		----------------------------------------------------------------
-		local function git_async(cmd, msg)
-			vim.system(cmd, { text = true }, function(res)
+		local notify = require("fidget.notification").notify
+
+		vim.api.nvim_create_user_command("GitCommit", function(args)
+			vim.system({ "git", "commit", "-am", args.args }, { text = true }, function(res)
 				if res.code == 0 then
-					notify(msg .. " ✓", vim.log.levels.INFO, { title = "Git" })
+					notify("Git commit complete ✓", vim.log.levels.INFO, { title = "Git" })
 				else
-					notify("Git error:\n" .. res.stderr, vim.log.levels.ERROR, { title = "Git" })
+					notify("Git commit failed", vim.log.levels.ERROR, { title = "Git" })
 				end
 			end)
-		end
-
-		-- Commands for async git commit / push
-		vim.api.nvim_create_user_command("GitCommit", function(args)
-			git_async({ "git", "commit", "-m", args.args }, "Git commit complete")
-		end, { nargs = 1, desc = "Run git commit asynchronously" })
+		end, { nargs = 1 })
 
 		vim.api.nvim_create_user_command("GitPush", function()
-			git_async({ "git", "push" }, "Git push complete")
-		end, { desc = "Run git push asynchronously" })
+			vim.system({ "git", "push" }, { text = true }, function(res)
+				if res.code == 0 then
+					notify("Git push complete ✓", vim.log.levels.INFO, { title = "Git" })
+				else
+					notify("Git push failed", vim.log.levels.ERROR, { title = "Git" })
+				end
+			end)
+		end, {})
 	end,
 }
