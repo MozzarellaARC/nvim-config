@@ -24,6 +24,9 @@ return {
 			},
 		},
 	},
+
+	-- git test
+
 	{
 		"mason-org/mason-lspconfig.nvim",
 		opts = {
