@@ -27,5 +27,40 @@ return {
 				fidget_message("buffer removed", args.file)
 			end,
 		})
+
+		--------------------------------------------------------------------
+		-- 🧠 Git notifications
+		--------------------------------------------------------------------
+
+		-- Detect Git commit via Fugitive
+		vim.api.nvim_create_autocmd("User", {
+			pattern = "FugitiveCommit",
+			callback = function()
+				notify("Git commit created", vim.log.levels.INFO, { title = "Git" })
+			end,
+		})
+
+		-- Detect Git push via Fugitive
+		vim.api.nvim_create_autocmd("User", {
+			pattern = "FugitivePush",
+			callback = function()
+				notify("Git push completed", vim.log.levels.INFO, { title = "Git" })
+			end,
+		})
+
+		-- Detect git commit/push in shell or terminal commands
+		vim.api.nvim_create_autocmd("TermClose", {
+			callback = function(args)
+				local chan = vim.api.nvim_buf_get_var(args.buf, "term_title")
+				if not chan then
+					return
+				end
+				if chan:match("git commit") then
+					notify("Git commit executed", vim.log.levels.INFO, { title = "Git" })
+				elseif chan:match("git push") then
+					notify("Git push executed", vim.log.levels.INFO, { title = "Git" })
+				end
+			end,
+		})
 	end,
 }
