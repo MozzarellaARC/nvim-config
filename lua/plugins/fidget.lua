@@ -15,9 +15,6 @@ return {
 			return path:gsub("^" .. vim.pesc(home), "~")
 		end
 
-		----------------------------------------------------------------
-		-- File events
-		----------------------------------------------------------------
 		vim.api.nvim_create_autocmd("BufWritePost", {
 			callback = function(args)
 				local lines = vim.fn.line("$")
@@ -42,32 +39,5 @@ return {
 				end, 10) -- 10 ms delay
 			end,
 		})
-
-		----------------------------------------------------------------
-		-- Git commands
-		----------------------------------------------------------------
-		vim.api.nvim_create_user_command("GitCommit", function(args)
-			vim.system({ "git", "commit", "-am", args.args }, { text = true }, function(res)
-				vim.schedule(function()
-					if res.code == 0 then
-						notify("Git commit complete ✓", vim.log.levels.INFO, { title = "Git" })
-					else
-						notify("Git commit failed:\n" .. res.stderr, vim.log.levels.ERROR, { title = "Git" })
-					end
-				end)
-			end)
-		end, { nargs = 1 })
-
-		vim.api.nvim_create_user_command("GitPush", function()
-			vim.system({ "git", "push" }, { text = true }, function(res)
-				vim.schedule(function()
-					if res.code == 0 then
-						notify("Git push complete ✓", vim.log.levels.INFO, { title = "Git" })
-					else
-						notify("Git push failed:\n" .. res.stderr, vim.log.levels.ERROR, { title = "Git" })
-					end
-				end)
-			end)
-		end, {})
 	end,
 }

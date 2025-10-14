@@ -102,25 +102,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- Inline Diagnostics
-vim.diagnostic.config({
-	underline = false,
-	virtual_text = {
-		spacing = 1,
-		prefix = "●",
-	},
-	update_in_insert = false,
-	severity_sort = true,
-	signs = {
-		text = {
-			-- Alas nerdfont icons don't render properly on Medium!
-			[vim.diagnostic.severity.ERROR] = " ",
-			[vim.diagnostic.severity.WARN] = " ",
-			[vim.diagnostic.severity.HINT] = " ",
-			[vim.diagnostic.severity.INFO] = " ",
-		},
-	},
-})
+-- Set up diagnostic highlight groups with underlines
+vim.cmd([[
+	highlight DiagnosticUnderlineError cterm=underline gui=underline guisp=Red
+	highlight DiagnosticUnderlineWarn cterm=underline gui=underline guisp=Orange
+	highlight DiagnosticUnderlineInfo cterm=underline gui=underline guisp=LightBlue
+	highlight DiagnosticUnderlineHint cterm=underline gui=underline guisp=LightGray
+]])
 
 -- Float Diagnostics
 vim.opt.updatetime = 250
@@ -129,8 +117,9 @@ vim.api.nvim_create_autocmd("CursorHold", {
 		vim.diagnostic.open_float(nil, {
 			focusable = true,
 			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-			border = "solid",
+			border = "none",
 			scope = "cursor",
+			position = "line",
 			source = "always",
 		})
 	end,

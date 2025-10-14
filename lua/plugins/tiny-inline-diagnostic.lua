@@ -44,9 +44,9 @@ return {
 			options = {
 				-- Display the source of the diagnostic (e.g., basedpyright, vsserver, lua_ls etc.)
 				show_source = {
-					enabled = true,
+					enabled = false,
 					-- Show source only when multiple sources exist for the same diagnostic
-					if_many = false,
+					if_many = true,
 				},
 
 				-- Use icons defined in the diagnostic configuration instead of preset icons
@@ -77,10 +77,10 @@ return {
 					always_show = true,
 
 					-- Trim whitespaces from the start/end of each line
-					trim_whitespaces = false,
+					trim_whitespaces = true,
 
 					-- Replace tabs with this many spaces in multiline diagnostics
-					tabstop = 4,
+					tabstop = 2,
 				},
 
 				-- Display all diagnostic messages on the cursor line, not just those under cursor
