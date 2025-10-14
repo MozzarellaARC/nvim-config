@@ -4,14 +4,14 @@ vim.pack.add({
 	{ src = "https://github.com/brenoprata10/nvim-highlight-colors" },
 })
 
--- text below applies for VimScript
+-- text below applies for Neovide only
 if vim.g.neovide then
 	vim.o.guifont = "Monaspace Krypton Var:b"
 end
 
 vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
 vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
-vim.wo.wrap = false
+vim.wo.wrap = false -- Text wrapping
 
 -- Set <space> as the leader key and important keymaps
 vim.g.mapleader = " "
@@ -149,9 +149,8 @@ vim.api.nvim_create_autocmd("FileType", {
 			if config.relative == "" then
 				local width = math.floor(vim.o.columns * 0.8)
 				local height = math.floor(vim.o.lines * 0.8)
-				local col = math.floor((vim.o.columns - width) / 2)
+				local col = math.floor((vim.o.columns - width) / 2 - 1)
 				local row = math.floor((vim.o.lines - height) / 2 - 2)
-
 				local float_win = vim.api.nvim_open_win(buf, true, {
 					relative = "editor",
 					width = width,
