@@ -4,23 +4,52 @@ vim.pack.add({
 	{ src = "https://github.com/brenoprata10/nvim-highlight-colors" },
 })
 
--- text below applies for Neovide only
+-- Neovide specifics
 if vim.g.neovide then
 	vim.o.guifont = "Monaspace Krypton Var:b"
 end
 
-vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
-vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
-vim.wo.wrap = false -- Text wrapping
-
--- Set <space> as the leader key and important keymaps
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-vim.keymap.set({ "n", "x", "v" }, "q", ":bd<CR>", { silent = true })
+-- Disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- File linker management
 vim.opt.autoread = true
 vim.opt.swapfile = false
+
+-- General keymap settings
+vim.g.mapleader = " " -- Leadner key <space>
+vim.g.maplocalleader = "\\" -- Local leader key <backslash>
+vim.opt.clipboard = "unnamedplus" -- Clipboard
+vim.keymap.set({ "n", "x", "v" }, "q", ":bd<CR>", { silent = true }) --Close buffer with 'q'
+vim.keyma.set("n", "<Esc>", function() -- Clear search on <Esc>
+	vim.fn.setreg("/", "")
+	vim.cmd("nohlsearch")
+end)
+
+-- Editor
+vim.opt.tabstop = 4 -- How many columns a tab counts for
+vim.opt.softtabstop = 4 -- How many spaces a tab feels like in insert mode
+vim.opt.shiftwidth = 4 -- How many spaces to use for each step of (auto)indent
+vim.opt.expandtab = true -- Use spaces instead of tabs
+vim.opt.cindent = true -- Indentation style for C-like languages
+vim.opt.number = true -- Show absolute line numbers
+
+-- coloring
+vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
+vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
+vim.wo.wrap = false -- Text wrapping
+
+-- Blinking cursor
+vim.opt.guicursor = {
+	"n-v-c:block-blinkwait700-blinkoff400-blinkon250",
+	"i-ci-ve:ver25-blinkwait700-blinkoff400-blinkon250",
+	"r-cr:hor20-blinkwait700-blinkoff400-blinkon250",
+	"o:hor50-blinkwait700-blinkoff400-blinkon250",
+}
+
+-- Provider
+vim.g.python3_host_prog = "C:/Users/M/scoop/shims/python313.exe"
 
 -- LSP
 vim.lsp.enable("lua_ls")
@@ -45,35 +74,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- Provider
-vim.g.python3_host_prog = "C:/Users/M/scoop/shims/python313.exe"
-
--- Disable netrw
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- Editor
-vim.opt.tabstop = 4 -- How many columns a tab counts for
-vim.opt.softtabstop = 4 -- How many spaces a tab feels like in insert mode
-vim.opt.shiftwidth = 4 -- How many spaces to use for each step of (auto)indent
-vim.opt.expandtab = true -- Use spaces instead of tabs
-vim.opt.cindent = true -- Indentation style for C-like languages
-vim.opt.number = true -- Show absolute line numbers
-
--- Blinking cursor
-vim.opt.guicursor = {
-	"n-v-c:block-blinkwait700-blinkoff400-blinkon250",
-	"i-ci-ve:ver25-blinkwait700-blinkoff400-blinkon250",
-	"r-cr:hor20-blinkwait700-blinkoff400-blinkon250",
-	"o:hor50-blinkwait700-blinkoff400-blinkon250",
-}
-
 -- Gutter/Sign Column
 -- vim.opt.signcolumn = "yes" -- Always show sign column to prevent text shifting
 -- vim.opt.numberwidth = 4 -- Width of the number column
-
--- Clipboard
-vim.opt.clipboard = "unnamedplus"
 
 -- Package Manager
 require("config.lazy")
