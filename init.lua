@@ -23,6 +23,7 @@ vim.lsp.enable("pwsh")
 vim.lsp.enable("copilot")
 vim.lsp.enable("pyright")
 
+-- LSP Inline Completion
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		local bufnr = args.buf
@@ -43,7 +44,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- Provider
 vim.g.python3_host_prog = "C:/Users/M/scoop/shims/python313.exe"
 
--- Disable netrw (use oil.nvim instead)
+-- Disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
