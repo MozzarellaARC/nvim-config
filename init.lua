@@ -4,6 +4,11 @@ vim.pack.add({
 	{ src = "https://github.com/brenoprata10/nvim-highlight-colors" },
 })
 
+-- text below applies for VimScript
+if vim.g.neovide then
+	vim.o.guifont = "Monaspace Krypton Var:b"
+end
+
 vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
 vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
 vim.wo.wrap = false
@@ -97,6 +102,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	callback = function()
+		vim.lsp.buf.format({ async = false })
+	end,
+})
+
 -- Inline Diagnostics
 vim.diagnostic.config({
 	underline = false,
@@ -132,7 +144,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "fugitive", "git", "gitcommit" },
+	pattern = { "fugitive", "git", "gitcommit", "conform", "ConformInfo" },
 	callback = function(args)
 		local buf = args.buf
 

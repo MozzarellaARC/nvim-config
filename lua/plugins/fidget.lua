@@ -31,6 +31,18 @@ return {
 			end,
 		})
 
+		vim.api.nvim_create_autocmd("BufDelete", {
+			callback = function(args)
+				local file = args.file or "[No Name]"
+				vim.defer_fn(function()
+					require("fidget.notification").notify(
+						string.format('"%s" buffer removed', file),
+						vim.log.levels.WARN
+					)
+				end, 10) -- 10 ms delay
+			end,
+		})
+
 		----------------------------------------------------------------
 		-- Git commands
 		----------------------------------------------------------------
