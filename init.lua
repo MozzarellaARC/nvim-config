@@ -36,12 +36,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, bufnr) then
 			vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
-			vim.keymap.set(
-				"i",
-				"<Tab>",
-				vim.lsp.inline_completion.get,
-				{ desc = "LSP: accept inline completion", buffer = bufnr }
-			)
+			vim.keymap.set("i", "<Tab>", function()
+				if not vim.lsp.inline_completion.get() then
+					return "<Tab>"
+				end
+			end, { expr = true, desc = "Accept the current inline completion" })
 		end
 	end,
 })
@@ -111,9 +110,6 @@ vim.cmd([[
 ]])
 
 -- Float Diagnostics
--- Diagnostics bufer content should be able to be selected and when the main buffer scrolls it should be able to stay in place,
--- and when cursor or scrooling is very far and fast it should close automatically
--- Float Diagnostics
 vim.opt.updatetime = 250
 vim.api.nvim_create_autocmd("CursorHold", {
 	callback = function()
@@ -124,12 +120,14 @@ vim.api.nvim_create_autocmd("CursorHold", {
 			source = "always",
 			max_height = 10,
 			max_width = 60,
-			close_events = { "CursorMoved", "InsertEnter" },
+			close_events = { "CursorMoved", "InsertEnter", "WinScrolled" },
 		})
 
-		-- Optional: automatically focus the float for a moment
 		if win and vim.api.nvim_win_is_valid(win) then
 			vim.api.nvim_set_current_win(win)
+			if vim.api.nvim_current_win(win) then
+				vim.api.nvim_set_current_buf(vim.api.nvim_get_current_buf())
+			end
 		end
 	end,
 })
