@@ -148,9 +148,9 @@ vim.api.nvim_create_autocmd("FileType", {
 			local config = vim.api.nvim_win_get_config(win)
 			if config.relative == "" then
 				local width = math.floor(vim.o.columns * 0.8)
-				local height = math.floor(vim.o.lines * 0.8)
+				local height = (math.floor(vim.o.lines * 0.8) - 2)
 				local col = math.floor((vim.o.columns - width) / 2 - 1)
-				local row = math.floor((vim.o.lines - height) / 2 - 2)
+				local row = math.floor((vim.o.lines - height) / 2 - 1)
 				local float_win = vim.api.nvim_open_win(buf, true, {
 					relative = "editor",
 					width = width,
