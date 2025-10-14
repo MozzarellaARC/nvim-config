@@ -1,66 +1,54 @@
 return {
 	"j-hui/fidget.nvim",
 	opts = {
-		notification = { override_vim_notify = false },
+		notification = {
+			override_vim_notify = false,
+		},
 	},
-
 	config = function(_, opts)
-		local fidget = require("fidget")
-		fidget.setup(opts)
+		require("fidget").setup(opts)
 		local notify = require("fidget.notification").notify
-		local function fidget_message(action, file)
-			local file_short = vim.fn.fnamemodify(file, ":~")
-			local lines = vim.api.nvim_buf_line_count(0)
-			local bytes = vim.fn.getfsize(file)
-			local msg = string.format('"%s" %dL, %dB %s', file_short, lines, bytes, action)
-			notify(msg, vim.log.levels.INFO, { title = "File Event", ttl = 3 })
+		local function shorten(path)
+			local home = vim.loop.os_homedir()
+			return path:gsub("^" .. vim.pesc(home), "~")
 		end
 
+		-- Suppress stdout/stderr completely:
+		vim.api.nvim_create_user_command("GitPushSilent", function()
+			git_async({ "git", "push", "--quiet" }, "Git push complete")
+		end, {})
+
+		----------------------------------------------------------------
+		-- File events
+		----------------------------------------------------------------
 		vim.api.nvim_create_autocmd("BufWritePost", {
 			callback = function(args)
-				fidget_message("written", args.file)
+				local lines = vim.fn.line("$")
+				local bytes = vim.fn.getfsize(args.file)
+				notify(string.format('"%s" %dL, %dB written', shorten(args.file), lines, bytes), vim.log.levels.INFO)
 			end,
 		})
 
-		vim.api.nvim_create_autocmd("BufDelete", {
-			callback = function(args)
-				fidget_message("buffer removed", args.file)
-			end,
-		})
-
-		--------------------------------------------------------------------
-		-- 🧠 Git notifications
-		--------------------------------------------------------------------
-
-		-- Detect Git commit via Fugitive
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "FugitiveCommit",
-			callback = function()
-				notify("Git commit created", vim.log.levels.INFO, { title = "Git" })
-			end,
-		})
-
-		-- Detect Git push via Fugitive
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "FugitivePush",
-			callback = function()
-				notify("Git push completed", vim.log.levels.INFO, { title = "Git" })
-			end,
-		})
-
-		-- Detect git commit/push in shell or terminal commands
-		vim.api.nvim_create_autocmd("TermClose", {
-			callback = function(args)
-				local chan = vim.api.nvim_buf_get_var(args.buf, "term_title")
-				if not chan then
-					return
+		----------------------------------------------------------------
+		-- Git helpers
+		----------------------------------------------------------------
+		local function git_async(cmd, msg)
+			vim.system(cmd, { text = true }, function(res)
+				if res.code == 0 then
+					notify(msg .. " ✓", vim.log.levels.INFO, { title = "Git" })
+				else
+					notify("Git error:\n" .. res.stderr, vim.log.levels.ERROR, { title = "Git" })
 				end
-				if chan:match("git commit") then
-					notify("Git commit executed", vim.log.levels.INFO, { title = "Git" })
-				elseif chan:match("git push") then
-					notify("Git push executed", vim.log.levels.INFO, { title = "Git" })
-				end
-			end,
-		})
+			end)
+		end
+
+		-- Commands for async git commit / push
+		vim.api.nvim_create_user_command("GitCommit", function(args)
+			git_async({ "git", "commit", "-m", args.args }, "Git commit complete")
+		end, { nargs = 1, desc = "Run git commit asynchronously" })
+
+		vim.api.nvim_create_user_command("GitPush", function()
+			git_async({ "git", "push" }, "Git push complete")
+		end, { desc = "Run git push asynchronously" })
 	end,
 }
