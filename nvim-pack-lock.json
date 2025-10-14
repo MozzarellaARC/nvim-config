@@ -12,10 +12,6 @@
       "rev": "ad7146a",
       "src": "https://github.com/mason-org/mason.nvim"
     },
-    "nvim-highlight-colors": {
-      "rev": "e0c4a58",
-      "src": "https://github.com/brenoprata10/nvim-highlight-colors"
-    },
     "nvim-lspconfig": {
       "rev": "ac98db2",
       "src": "https://github.com/neovim/nvim-lspconfig"

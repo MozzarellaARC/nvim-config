@@ -1,7 +1,6 @@
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/thesimonho/kanagawa-paper.nvim" },
-	{ src = "https://github.com/brenoprata10/nvim-highlight-colors" },
 })
 
 -- Neovide specifics
@@ -22,7 +21,7 @@ vim.g.mapleader = " " -- Leadner key <space>
 vim.g.maplocalleader = "\\" -- Local leader key <backslash>
 vim.opt.clipboard = "unnamedplus" -- Clipboard
 vim.keymap.set({ "n", "x", "v" }, "q", ":bd<CR>", { silent = true }) --Close buffer with 'q'
-vim.keyma.set("n", "<Esc>", function() -- Clear search on <Esc>
+vim.keymap.set("n", "<Esc>", function() -- Clear search on <Esc>
 	vim.fn.setreg("/", "")
 	vim.cmd("nohlsearch")
 end)
@@ -34,11 +33,22 @@ vim.opt.shiftwidth = 4 -- How many spaces to use for each step of (auto)indent
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.cindent = true -- Indentation style for C-like languages
 vim.opt.number = true -- Show absolute line numbers
+vim.wo.wrap = false -- Text wrapping
+
+-- Gutter/Sign Column
+-- vim.opt.signcolumn = "yes" -- Always show sign column to prevent text shifting
+-- vim.opt.numberwidth = 4 -- Width of the number column
 
 -- coloring
 vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
 vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
-vim.wo.wrap = false -- Text wrapping
+
+-- Highlight matching pairs with a block background so the characters stay readable
+vim.api.nvim_set_hl(0, "MatchParen", {
+	bg = "#3A3A4B",
+	fg = "#fff2cc",
+	bold = true,
+})
 
 -- Blinking cursor
 vim.opt.guicursor = {
@@ -74,21 +84,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- Gutter/Sign Column
--- vim.opt.signcolumn = "yes" -- Always show sign column to prevent text shifting
--- vim.opt.numberwidth = 4 -- Width of the number column
-
 -- Package Manager
 require("config.lazy")
 -- Key Remap
 require("config.keymap")
-
--- Highlight matching pairs with a block background so the characters stay readable
-vim.api.nvim_set_hl(0, "MatchParen", {
-	bg = "#3A3A4B",
-	fg = "#fff2cc",
-	bold = true,
-})
 
 -- Disable LSP semantic highlights
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -103,6 +102,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		client.server_capabilities.semanticTokensProvider = nil
 	end,
 })
+
+-- Diagnostics integration
+vim.diagnostic.config({ virtual_text = false })
+vim.diagnostic.open_float = require("tiny-inline-diagnostic.override").open_float
 
 -- Set up diagnostic highlight groups with underlines
 vim.cmd([[
