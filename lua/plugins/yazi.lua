@@ -67,7 +67,7 @@ return {
 		},
 
 		-- the floating window scaling factor. 1 means 100%, 0.9 means 90%, etc.
-		floating_window_scaling_factor = 0.9,
+		floating_window_scaling_factor = 0.8,
 
 		-- the transparency of the yazi floating window (0-100). See :h winblend
 		yazi_floating_window_winblend = 0,
@@ -75,7 +75,7 @@ return {
 		-- the type of border to use for the floating window. Can be many values,
 		-- including 'none', 'rounded', 'single', 'double', 'shadow', etc. For
 		-- more information, see :h nvim_open_win
-		yazi_floating_window_border = "rounded",
+		yazi_floating_window_border = "solid",
 
 		-- the zindex of the yazi floating window. Can be used to make the yazi
 		-- window fullscreen. See `:h nvim_open_win()` for more information.
@@ -128,6 +128,12 @@ return {
 			yazi_opened = function(preselected_path, yazi_buffer_id, config)
 				-- you can optionally modify the config for this specific yazi
 				-- invocation if you want to customize the behaviour
+				local win_id = vim.fn.win_getid()
+				local win_config = vim.api.nvim_win_get_config(win_id)
+				if win_config.row then
+					win_config.row = win_config.row - 2
+					vim.api.nvim_win_set_config(win_id, win_config)
+				end
 			end,
 
 			-- when yazi was successfully closed

@@ -102,13 +102,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function()
-		vim.lsp.buf.format({ async = false })
-	end,
-})
-
 -- Inline Diagnostics
 vim.diagnostic.config({
 	underline = false,
@@ -143,6 +136,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 	end,
 })
 
+-- Floating Window
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "fugitive", "git", "gitcommit", "conform", "ConformInfo" },
 	callback = function(args)
@@ -156,7 +150,7 @@ vim.api.nvim_create_autocmd("FileType", {
 				local width = math.floor(vim.o.columns * 0.8)
 				local height = math.floor(vim.o.lines * 0.8)
 				local col = math.floor((vim.o.columns - width) / 2)
-				local row = math.floor((vim.o.lines - height) / 2 - 1)
+				local row = math.floor((vim.o.lines - height) / 2 - 2)
 
 				local float_win = vim.api.nvim_open_win(buf, true, {
 					relative = "editor",
@@ -165,8 +159,6 @@ vim.api.nvim_create_autocmd("FileType", {
 					col = col,
 					row = row,
 					border = "solid",
-					title = "Git",
-					title_pos = "center",
 				})
 
 				-- Close the original non-floating window
