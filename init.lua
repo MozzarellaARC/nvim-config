@@ -122,7 +122,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 			max_width = 60,
 			close_events = { "CursorMoved", "InsertEnter", "WinScrolled" },
 		})
-
+		-- Focus management
 		if win and vim.api.nvim_win_is_valid(win) then
 			vim.api.nvim_set_current_win(win)
 			if vim.api.nvim_current_win(win) then
