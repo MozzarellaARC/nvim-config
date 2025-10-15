@@ -107,7 +107,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- Diagnostics integration
 vim.diagnostic.config({ virtual_text = false })
-vim.diagnostic.open_float = require("tiny-inline-diagnostic.override").open_float
+-- vim.diagnostic.open_float = require("tiny-inline-diagnostic.override").open_float
 
 -- Set up diagnostic highlight groups with underlines
 vim.cmd([[
@@ -116,6 +116,14 @@ vim.cmd([[
 	highlight DiagnosticUnderlineInfo cterm=underline gui=underline guisp=LightBlue
 	highlight DiagnosticUnderlineHint cterm=underline gui=underline guisp=LightGray
 ]])
+
+local old_notify = vim.notify
+vim.notify = function(msg, level, opts)
+	if msg:match("barbar") then
+		return -- ignore messages containing "barbar"
+	end
+	old_notify(msg, level, opts)
+end
 
 -- Float Diagnostics
 vim.opt.updatetime = 250

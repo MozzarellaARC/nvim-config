@@ -127,7 +127,23 @@ return {
 			-- A list of functions, each representing a global custom command
 			-- that will be available in all sources (if not overridden in `opts[source_name].commands`)
 			-- see `:h neo-tree-custom-commands-global`
-			commands = {},
+			commands = {
+				buffer_navigation = function(state)
+					local node = state.tree:get_node()
+					if not node then
+						return
+					end
+					if node.type == "directory" then
+						state.commands.toggle_node(state)
+						return
+					end
+
+					local original_preview = state.config.preview
+					state.config.preview = vim.tbl_deep_extend("force", {}, original_preview or {}, preview_opts)
+					common_commands.preview(state)
+					state.config.preview = original_preview
+				end,
+			},
 			window = {
 				position = "left",
 				width = 40,
@@ -135,6 +151,7 @@ return {
 					noremap = true,
 					nowait = true,
 				},
+
 				mappings = {
 					["<LeftRelease>"] = {
 						"buffer_navigation",
@@ -298,23 +315,7 @@ return {
 					},
 				},
 
-				commands = {
-					buffer_navigation = function(state)
-						local node = state.tree:get_node()
-						if not node then
-							return
-						end
-						if node.type == "directory" then
-							state.commands.toggle_node(state)
-							return
-						end
-
-						local original_preview = state.config.preview
-						state.config.preview = vim.tbl_deep_extend("force", {}, original_preview or {}, preview_opts)
-						common_commands.preview(state)
-						state.config.preview = original_preview
-					end,
-				}, -- Add a custom command or override a global one using the same function name
+				-- Add a custom command or override a global one using the same function name
 			},
 			buffers = {
 				follow_current_file = {
