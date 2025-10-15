@@ -3,22 +3,13 @@ vim.pack.add({
 	{ src = "https://github.com/thesimonho/kanagawa-paper.nvim" },
 })
 
--- coloring
+-- Theme
 vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
 vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
+vim.opt.winborder = "none"
 
 vim.opt.fillchars:append("diff:╱")
--- Define a local colors table so subsequent references to colors[...] are valid.
-
-vim.api.nvim_set_hl(0, "DiffAdd", { bg = "#34462F" })
-vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#462F2F" })
-vim.api.nvim_set_hl(0, "DiffChange", { bg = "#2F4146" })
-vim.api.nvim_set_hl(0, "DiffText", { bg = "#463C2F" })
-
-vim.api.nvim_set_hl(0, "DiffAdded", { fg = "#7A5C8A", bold = true })
-vim.api.nvim_set_hl(0, "DiffDelete", { fg = "#3E2B31", bold = true })
-vim.api.nvim_set_hl(0, "DiffRemoved", { fg = "#5C8A8A", bold = true })
-vim.api.nvim_set_hl(0, "DiffChanged", { fg = "#8A6E5C", bold = true })
+vim.api.nvim_set_hl(0, "DiffDelete", { fg = "#491e24", bold = true })
 
 -- Neovide specifics
 if vim.g.neovide then
