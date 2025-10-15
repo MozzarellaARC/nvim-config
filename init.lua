@@ -145,7 +145,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 			scope = "cursor",
 			source = "always",
 			max_height = 10,
-			max_width = 60,
+			max_width = 80,
 			close_events = { "CursorMoved", "InsertEnter", "WinScrolled" },
 		})
 		-- Focus management
