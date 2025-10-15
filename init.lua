@@ -3,14 +3,6 @@ vim.pack.add({
 	{ src = "https://github.com/thesimonho/kanagawa-paper.nvim" },
 })
 
--- Theme
-vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
-vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
-vim.opt.winborder = "none"
-
-vim.opt.fillchars:append("diff:╱")
-vim.api.nvim_set_hl(0, "DiffDelete", { fg = "#491e24", bold = true })
-
 -- Neovide specifics
 if vim.g.neovide then
 	vim.o.guifont = "Monaspace Krypton Var:b"
@@ -46,6 +38,14 @@ vim.wo.wrap = false -- Text wrapping
 -- Gutter/Sign Column
 -- vim.opt.signcolumn = "yes" -- Always show sign column to prevent text shifting
 -- vim.opt.numberwidth = 4 -- Width of the number column
+
+-- Theme
+vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
+vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
+vim.opt.winborder = "none"
+
+vim.opt.fillchars:append("diff:╱")
+vim.api.nvim_set_hl(0, "DiffDelete", { fg = "#491e24", bold = true })
 
 -- Highlight matching pairs with a block background so the characters stay readable
 vim.api.nvim_set_hl(0, "MatchParen", {
@@ -121,12 +121,15 @@ vim.cmd([[
 	highlight DiagnosticUnderlineHint cterm=underline gui=underline guisp=LightGray
 ]])
 
-local old_notify = vim.notify
-vim.notify = function(msg, level, opts)
-	if msg:match("barbar") then
-		return -- ignore messages containing "barbar"
+local original_echo = vim.api.nvim_echo
+vim.api.nvim_echo = function(chunks, history, opts)
+	local msg = table.concat(vim.tbl_map(function(c)
+		return c[1]
+	end, chunks))
+	if msg:match("Couldn't find buffer") then
+		return
 	end
-	old_notify(msg, level, opts)
+	return original_echo(chunks, history, opts)
 end
 
 -- Float Diagnostics
