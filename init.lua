@@ -3,6 +3,23 @@ vim.pack.add({
 	{ src = "https://github.com/thesimonho/kanagawa-paper.nvim" },
 })
 
+-- coloring
+vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
+vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
+
+vim.opt.fillchars:append("diff:╱")
+-- Define a local colors table so subsequent references to colors[...] are valid.
+
+vim.api.nvim_set_hl(0, "DiffAdd", { bg = "#34462F" })
+vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#462F2F" })
+vim.api.nvim_set_hl(0, "DiffChange", { bg = "#2F4146" })
+vim.api.nvim_set_hl(0, "DiffText", { bg = "#463C2F" })
+
+vim.api.nvim_set_hl(0, "DiffAdded", { fg = "#7A5C8A", bold = true })
+vim.api.nvim_set_hl(0, "DiffDelete", { fg = "#3E2B31", bold = true })
+vim.api.nvim_set_hl(0, "DiffRemoved", { fg = "#5C8A8A", bold = true })
+vim.api.nvim_set_hl(0, "DiffChanged", { fg = "#8A6E5C", bold = true })
+
 -- Neovide specifics
 if vim.g.neovide then
 	vim.o.guifont = "Monaspace Krypton Var:b"
@@ -38,10 +55,6 @@ vim.wo.wrap = false -- Text wrapping
 -- Gutter/Sign Column
 -- vim.opt.signcolumn = "yes" -- Always show sign column to prevent text shifting
 -- vim.opt.numberwidth = 4 -- Width of the number column
-
--- coloring
-vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
-vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
 
 -- Highlight matching pairs with a block background so the characters stay readable
 vim.api.nvim_set_hl(0, "MatchParen", {
