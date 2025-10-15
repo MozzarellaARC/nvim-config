@@ -161,20 +161,5 @@ return {
 				end, 10) -- 10 ms delay
 			end,
 		})
-
-		local original_echo = vim.api.nvim_echo
-		vim.api.nvim_echo = function(chunks, history, opts)
-			local msg = ""
-			for _, chunk in ipairs(chunks) do
-				msg = msg .. chunk[1]
-			end
-
-			-- Only handle Barbar messages (avoid duplicating all echoes)
-			if msg:match("Buffer") or msg:match("barbar") then
-				fidget_notify(msg, vim.log.levels.INFO, { title = "Barbar" })
-			else
-				original_echo(chunks, history, opts)
-			end
-		end
 	end,
 }
