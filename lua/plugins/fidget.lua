@@ -129,8 +129,52 @@ return {
 			},
 		})
 
-		vim.api.nvim_create_autocmd("BufWrite", {
-			pattern = "barbar",
+		-- shorten path (replace home with ~)
+		local notify = require("fidget.notification").notify
+		local function shorten(path)
+			local home = vim.loop.os_homedir()
+			return path:gsub("^" .. vim.pesc(home), "~")
+		end
+
+		-- notify on file write
+		vim.api.nvim_create_autocmd("BufWritePost", {
+			callback = function(args)
+				local lines = vim.fn.line("$")
+				local bytes = vim.fn.getfsize(args.file)
+				vim.schedule(function()
+					notify(
+						string.format('"%s" %dL, %dB written', shorten(args.file), lines, bytes),
+						vim.log.levels.INFO
+					)
+				end)
+			end,
 		})
+		-- notify on buffer delete
+		vim.api.nvim_create_autocmd("BufDelete", {
+			callback = function(args)
+				local file = args.file or "[No Name]"
+				vim.defer_fn(function()
+					require("fidget.notification").notify(
+						string.format('"%s" buffer removed', file),
+						vim.log.levels.WARN
+					)
+				end, 10) -- 10 ms delay
+			end,
+		})
+
+		local original_echo = vim.api.nvim_echo
+		vim.api.nvim_echo = function(chunks, history, opts)
+			local msg = ""
+			for _, chunk in ipairs(chunks) do
+				msg = msg .. chunk[1]
+			end
+
+			-- Only handle Barbar messages (avoid duplicating all echoes)
+			if msg:match("Buffer") or msg:match("barbar") then
+				fidget_notify(msg, vim.log.levels.INFO, { title = "Barbar" })
+			else
+				original_echo(chunks, history, opts)
+			end
+		end
 	end,
 }

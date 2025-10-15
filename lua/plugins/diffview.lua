@@ -34,7 +34,7 @@ return {
 				-- For more info, see |diffview-config-view.x.layout|.
 				default = {
 					-- Config for changed files, and staged files in diff views.
-					layout = "diff2_horizontal",
+					layout = "diff2_vertical",
 					disable_diagnostics = false, -- Temporarily disable diagnostics for diff buffers while in the view.
 					winbar_info = false, -- See |diffview-config-view.x.winbar_info|
 				},
@@ -46,7 +46,7 @@ return {
 				},
 				file_history = {
 					-- Config for changed files in file history views.
-					layout = "diff2_horizontal",
+					layout = "diff2_vertical",
 					disable_diagnostics = false, -- Temporarily disable diagnostics for diff buffers while in the view.
 					winbar_info = false, -- See |diffview-config-view.x.winbar_info|
 				},
@@ -120,7 +120,7 @@ return {
 					local win_width = ui.width
 					local win_height = ui.height
 					local width = math.floor(win_width * 0.9) -- 90% of screen width
-					local height = #commands
+					local height = 2
 
 					-- Window configuration
 					local opts = {
@@ -130,9 +130,7 @@ return {
 						col = math.floor((win_width - width) / 2), -- Center horizontally
 						row = win_height - height - 4, -- Position at bottom
 						style = "minimal",
-						border = { " ", " ", " ", " ", " ", " ", " ", " " },
-						title = " ",
-						title_pos = "center",
+						border = "solid",
 					}
 
 					local win = vim.api.nvim_open_win(buf, false, opts)

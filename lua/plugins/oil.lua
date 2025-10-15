@@ -4,7 +4,7 @@ return {
 	---@type oil.SetupOpts
 	opts = {},
 	keys = {
-		{ "-", "<CMD>Oil<CR>", desc = "Open parent directory" },
+		-- { "-", "<CMD>Oil<CR>", desc = "Open parent directory" },
 	},
 	config = function()
 		require("oil").setup()
