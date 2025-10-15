@@ -18,6 +18,7 @@ return {
 				"yaml",
 				"latex",
 				"html",
+				"rust",
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
@@ -31,7 +32,7 @@ return {
 			---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
 
 			highlight = {
-				enable = false,
+				enable = true,
 
 				-- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
 				-- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is

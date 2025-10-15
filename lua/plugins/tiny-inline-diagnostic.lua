@@ -88,10 +88,10 @@ return {
 
 				-- Enable diagnostics in Insert mode
 				-- If enabled, consider setting throttle to 0 to avoid visual artifacts
-				enable_on_insert = true,
+				enable_on_insert = false,
 
 				-- Enable diagnostics in Select mode (e.g., when auto-completing with Blink)
-				enable_on_select = true,
+				enable_on_select = false,
 
 				-- Manage how diagnostic messages handle overflow
 				overflow = {

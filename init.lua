@@ -32,6 +32,10 @@ vim.opt.number = true -- Show absolute line numbers
 vim.opt.tabstop = 4 -- How many columns a tab counts for
 vim.opt.shiftwidth = 4 -- How many spaces to use for each step of (auto)indent
 vim.opt.cindent = true -- Indentation style for C-like languages
+vim.opt.smartindent = true -- Insert indents automatically
+vim.opt.undofile = true -- Enable persistent undo
+vim.opt.incsearch = true -- Show search matches as you type
+vim.opt.signcolumn = "yes" -- Always show sign column to prevent text shifting
 
 -- Gutter/Sign Column
 -- vim.opt.signcolumn = "yes" -- Always show sign column to prevent text shifting
@@ -71,6 +75,11 @@ vim.lsp.enable("pyright")
 vim.lsp.enable("tailwindcss")
 vim.lsp.enable("css-lsp")
 
+-- Package Manager
+require("config.lazy")
+-- Key Remap
+require("config.keymap")
+
 -- LSP Inline Completion
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
@@ -87,11 +96,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 	end,
 })
-
--- Package Manager
-require("config.lazy")
--- Key Remap
-require("config.keymap")
 
 -- Disable LSP semantic highlights
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -119,6 +123,7 @@ vim.cmd([[
 	highlight DiagnosticUnderlineHint cterm=underline gui=underline guisp=LightGray
 ]])
 
+-- Suppress specific error messages (barbar.nvim)
 local original_echo = vim.api.nvim_echo
 vim.api.nvim_echo = function(chunks, history, opts)
 	local msg = table.concat(vim.tbl_map(function(c)
