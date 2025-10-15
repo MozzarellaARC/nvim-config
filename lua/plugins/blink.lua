@@ -43,6 +43,16 @@ return {
 				end,
 				"fallback",
 			},
+			["<CR>"] = {
+				function(cmp)
+					if cmp.is_visible() and cmp.get_selected_item() then
+						return cmp.accept()
+					end
+					-- Otherwise insert newline
+					return false
+				end,
+				"fallback",
+			},
 		},
 
 		appearance = {

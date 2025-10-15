@@ -27,13 +27,11 @@ vim.keymap.set("n", "<Esc>", function() -- Clear search on <Esc>
 end)
 
 -- Editor
-vim.opt.tabstop = 4 -- How many columns a tab counts for
-vim.opt.softtabstop = 4 -- How many spaces a tab feels like in insert mode
-vim.opt.shiftwidth = 4 -- How many spaces to use for each step of (auto)indent
-vim.opt.expandtab = true -- Use spaces instead of tabs
-vim.opt.cindent = true -- Indentation style for C-like languages
-vim.opt.number = true -- Show absolute line numbers
 vim.wo.wrap = false -- Text wrapping
+vim.opt.number = true -- Show absolute line numbers
+vim.opt.tabstop = 4 -- How many columns a tab counts for
+vim.opt.shiftwidth = 4 -- How many spaces to use for each step of (auto)indent
+vim.opt.cindent = true -- Indentation style for C-like languages
 
 -- Gutter/Sign Column
 -- vim.opt.signcolumn = "yes" -- Always show sign column to prevent text shifting
@@ -138,7 +136,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 	callback = function()
 		local win = vim.diagnostic.open_float(nil, {
 			focusable = true,
-			border = "solid",
+			border = "none",
 			scope = "cursor",
 			source = "always",
 			max_height = 10,
