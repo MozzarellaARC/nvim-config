@@ -33,13 +33,6 @@ vim.opt.tabstop = 4 -- How many columns a tab counts for
 vim.opt.shiftwidth = 4 -- How many spaces to use for each step of (auto)indent
 vim.opt.cindent = true -- Indentation style for C-like languages
 vim.opt.smartindent = true -- Insert indents automatically
-vim.opt.undofile = true -- Enable persistent undo
-vim.opt.incsearch = true -- Show search matches as you type
-vim.opt.signcolumn = "yes" -- Always show sign column to prevent text shifting
-
--- Gutter/Sign Column
--- vim.opt.signcolumn = "yes" -- Always show sign column to prevent text shifting
--- vim.opt.numberwidth = 4 -- Width of the number column
 
 -- Theme
 vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
