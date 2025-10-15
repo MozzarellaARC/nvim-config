@@ -120,7 +120,7 @@ return {
 					local win_width = ui.width
 					local win_height = ui.height
 					local width = math.floor(win_width * 0.9) -- 90% of screen width
-					local height = 2
+					local height = 1
 
 					-- Window configuration
 					local opts = {
@@ -128,9 +128,9 @@ return {
 						width = width,
 						height = height,
 						col = math.floor((win_width - width) / 2), -- Center horizontally
-						row = win_height - height - 4, -- Position at bottom
+						row = win_height - height - 1, -- Position at bottom
 						style = "minimal",
-						border = "solid",
+						border = "none",
 					}
 
 					local win = vim.api.nvim_open_win(buf, false, opts)

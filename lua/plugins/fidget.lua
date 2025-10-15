@@ -136,6 +136,13 @@ return {
 			return path:gsub("^" .. vim.pesc(home), "~")
 		end
 
+		-- test
+		-- vim.api.nvim_create_autocmd("BufWritePost", {
+		-- 	callback = function()
+		-- 		notify("Hello, world!", vim.log.levels.INFO)
+		-- 	end,
+		-- })
+
 		-- notify on file write
 		vim.api.nvim_create_autocmd("BufWritePost", {
 			callback = function(args)
