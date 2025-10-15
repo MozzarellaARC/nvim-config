@@ -60,6 +60,32 @@ return {
 			-- Adjusts spacing to ensure icons are aligned
 			nerd_font_variant = "mono",
 		},
+
+		term = {
+			enabled = true,
+			keymap = { preset = "inherit" }, -- Inherits from top level `keymap` config when not set
+			sources = {},
+			completion = {
+				trigger = {
+					show_on_blocked_trigger_characters = {},
+					show_on_x_blocked_trigger_characters = nil, -- Inherits from top level `completion.trigger.show_on_blocked_trigger_characters` config when not set
+				},
+				-- Inherits from top level config options when not set
+				list = {
+					selection = {
+						-- When `true`, will automatically select the first item in the completion list
+						preselect = nil,
+						-- When `true`, inserts the completion item automatically when selecting it
+						auto_insert = true,
+					},
+				},
+				-- Whether to automatically show the window when new completion items are available
+				menu = { auto_show = true },
+				-- Displays a preview of the selected item on the current line
+				ghost_text = { enabled = true },
+			},
+		},
+
 		cmdline = {
 			enabled = true,
 			-- use 'inherit' to inherit mappings from top level `keymap` config
@@ -102,13 +128,14 @@ return {
 				-- Default is false for cmdline, true for cmdwin (command-line window)
 				menu = {
 					auto_show = function(ctx, _)
-						return ctx.mode == "cmdline" or ctx.mode == "cmdwin"
+						return ctx.mode == "cmdline"
 					end,
 				},
 				-- Displays a preview of the selected item on the current line
 				ghost_text = { enabled = true },
 			},
 		},
+
 		completion = {
 			-- Only show the documentation popup when manually triggered
 			documentation = { auto_show = true },
