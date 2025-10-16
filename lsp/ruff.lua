@@ -1,18 +1,28 @@
 return {
 	vim.lsp.config("ruff", {
 		cmd = { "ruff", "server" },
-		filetypes = { "python" },
-		root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git" },
+		filetypes = { "python", ".py" },
+		root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git", "main.py" },
 		init_options = {
 			settings = {
-				configurationPreference = "editorOnly",
+				configurationPreference = "filesystemFirst",
 				exclude = { "bpy" },
-				-- logLevel = "debug",
+				logLevel = "debug",
 				organizeImports = true,
 				lint = {
-					-- ignore = { "F403" },
+					enable = true,
+				},
+				format = {
+					preview = true,
+					backend = "uv",
 				},
 			},
 		},
+	}),
+	vim.api.nvim_create_autocmd("BufWritePre", {
+		pattern = "*.py",
+		callback = function()
+			vim.cmd("silent! %!ruff format -")
+		end,
 	}),
 }

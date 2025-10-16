@@ -1,6 +1,6 @@
 return {
 	"stevearc/conform.nvim",
-	lazy = "very lazy",
+	lazy = false,
 	config = function()
 		require("conform").setup({
 			-- Map of filetype to formatters
@@ -10,15 +10,16 @@ return {
 				go = { "goimports", "gofmt" },
 				-- You can also customize some of the format options for the filetype
 				rust = { "rustfmt", lsp_format = "fallback" },
+				python = { "ruff", lsp_format = "ruff" },
 				-- You can use a function here to determine the formatters dynamically
-				python = function(bufnr)
-					if require("conform").get_formatter_info("black", bufnr).available then
-						return { "black" }
-					else
-						-- return { "pyright" }
-						return
-					end
-				end,
+				-- python = function(bufnr)
+				-- 	if require("ruff").get_formatter_info("ruff", bufnr).available then
+				-- 		return { "ruff" }
+				-- 	else
+				-- 		-- return { "pyright" }
+				-- 		return
+				-- 	end
+				-- end,
 				-- Use the "*" filetype to run formatters on all filetypes.
 				-- ["*"] = { "codespell" },
 				-- Use the "_" filetype to run formatters on filetypes that don't

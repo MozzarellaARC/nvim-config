@@ -83,9 +83,7 @@ vim.opt.guicursor = {
 vim.g.python3_host_prog = "C:/Users/M/scoop/shims/python313.exe"
 
 -- LSP enabler
-vim.lsp.enable("lua_ls")
-vim.lsp.enable("ruff")
-vim.lsp.enable("pwsh")
+vim.lsp.enable({ "lua_ls", "ruff", "pwsh" })
 -- vim.lsp.enable("copilot")
 
 -- Package Manager
