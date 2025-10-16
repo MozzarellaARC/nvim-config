@@ -50,8 +50,9 @@ end)
 -- Editor
 vim.wo.wrap = false -- Text wrapping
 vim.opt.number = true -- Show absolute line numbers
-vim.opt.tabstop = 4 -- How many columns a tab counts for
-vim.opt.shiftwidth = 4 -- How many spaces to use for each step of (auto)indent
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.cindent = true -- Indentation style for C-like languages
 vim.opt.smartindent = true -- Insert indents automatically
 

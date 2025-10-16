@@ -8,9 +8,9 @@ return {
 				configurationPreference = "editorOnly",
 				exclude = { "bpy" },
 				-- logLevel = "debug",
-				organizeImports = false,
+				organizeImports = true,
 				lint = {
-					ignore = { "F403" },
+					-- ignore = { "F403" },
 				},
 			},
 		},

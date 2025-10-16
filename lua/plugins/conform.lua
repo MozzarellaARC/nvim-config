@@ -1,5 +1,6 @@
 return {
 	"stevearc/conform.nvim",
+	lazy = "very lazy",
 	config = function()
 		require("conform").setup({
 			-- Map of filetype to formatters
@@ -11,8 +12,8 @@ return {
 				rust = { "rustfmt", lsp_format = "fallback" },
 				-- You can use a function here to determine the formatters dynamically
 				python = function(bufnr)
-					if require("conform").get_formatter_info("ruff", bufnr).available then
-						return { "ruff" }
+					if require("conform").get_formatter_info("black", bufnr).available then
+						return { "black" }
 					else
 						-- return { "pyright" }
 						return

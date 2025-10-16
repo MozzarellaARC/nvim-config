@@ -50,8 +50,6 @@ return {
 				automatic_enable = {
 					"lua_ls",
 					"vimls",
-					"cssls",
-					"tailwindcss",
 				},
 			})
 		end,
