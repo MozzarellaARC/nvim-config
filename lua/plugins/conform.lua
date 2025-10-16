@@ -14,7 +14,7 @@ return {
 					if require("conform").get_formatter_info("ruff", bufnr).available then
 						return { "ruff" }
 					else
-						return { "pyright" }
+						-- return { "pyright" }
 					end
 				end,
 				-- Use the "*" filetype to run formatters on all filetypes.
