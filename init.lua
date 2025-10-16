@@ -1,11 +1,31 @@
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/thesimonho/kanagawa-paper.nvim" },
+	{ src = "https://github.com/github/copilot.vim" },
 })
 
 -- Neovide specifics
 if vim.g.neovide then
 	vim.o.guifont = "Monaspace Krypton Var:b"
+end
+
+vim.opt.mouse = "a"
+
+-- Mouse auto focus_window_under_mouse
+local function focus_window_under_mouse()
+	vim.schedule(function()
+		local mouse_pos = vim.fn.getmousepos()
+		if mouse_pos.winid ~= 0 then
+			vim.api.nvim_set_current_win(mouse_pos.winid)
+		end
+	end)
+end
+
+for _, event in ipairs({ "<ScrollWheelUp>", "<ScrollWheelDown>" }) do
+	vim.keymap.set("", event, function()
+		focus_window_under_mouse()
+		return event
+	end, { expr = true, noremap = true, silent = true })
 end
 
 -- Disable netrw
@@ -62,11 +82,9 @@ vim.g.python3_host_prog = "C:/Users/M/scoop/shims/python313.exe"
 
 -- LSP enabler
 vim.lsp.enable("lua_ls")
+vim.lsp.enable("ruff")
 vim.lsp.enable("pwsh")
 -- vim.lsp.enable("copilot")
-vim.lsp.enable("ruff")
-vim.lsp.enable("tailwindcss")
-vim.lsp.enable("css-lsp")
 
 -- Package Manager
 require("config.lazy")
@@ -116,13 +134,13 @@ vim.cmd([[
 	highlight DiagnosticUnderlineHint cterm=underline gui=underline guisp=LightGray
 ]])
 
--- Suppress specific error messages (barbar.nvim)
+-- Suppress specific error messages
 local original_echo = vim.api.nvim_echo
 vim.api.nvim_echo = function(chunks, history, opts)
 	local msg = table.concat(vim.tbl_map(function(c)
 		return c[1]
 	end, chunks))
-	if msg:match("Couldn't find buffer") then
+	if msg:match("Couldn't find buffer") or msg:match("written") then
 		return
 	end
 	return original_echo(chunks, history, opts)

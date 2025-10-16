@@ -15,6 +15,7 @@ return {
 						return { "ruff" }
 					else
 						-- return { "pyright" }
+						return
 					end
 				end,
 				-- Use the "*" filetype to run formatters on all filetypes.

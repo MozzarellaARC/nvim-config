@@ -101,7 +101,7 @@ return {
 						align = "bottom", -- How to align the notification window
 						relative = "editor", -- What the notification window position is relative to
 						tabstop = 8, -- Width of each tab character in the notification window
-						avoid = { "barbar" }, -- Filetypes the notification window should avoid
+						avoid = { "barbar.nvim", "Barbar" }, -- Filetypes the notification window should avoid
 						-- e.g., { "aerial", "NvimTree", "neotest-summary" }
 					},
 				},
@@ -127,46 +127,6 @@ return {
 					path = string.format("%s/fidget.nvim.log", vim.fn.stdpath("cache")),
 				},
 			},
-		})
-
-		-- shorten path (replace home with ~)
-		local notify = require("fidget.notification").notify
-		local function shorten(path)
-			local home = vim.loop.os_homedir()
-			return path:gsub("^" .. vim.pesc(home), "~")
-		end
-
-		-- test
-		-- vim.api.nvim_create_autocmd("BufWritePost", {
-		-- 	callback = function()
-		-- 		notify("Hello, world!", vim.log.levels.INFO)
-		-- 	end,
-		-- })
-
-		-- notify on file write
-		vim.api.nvim_create_autocmd("BufWritePost", {
-			callback = function(args)
-				local lines = vim.fn.line("$")
-				local bytes = vim.fn.getfsize(args.file)
-				vim.schedule(function()
-					notify(
-						string.format('"%s" %dL, %dB written', shorten(args.file), lines, bytes),
-						vim.log.levels.INFO
-					)
-				end)
-			end,
-		})
-		-- notify on buffer delete
-		vim.api.nvim_create_autocmd("BufDelete", {
-			callback = function(args)
-				local file = args.file or "[No Name]"
-				vim.defer_fn(function()
-					require("fidget.notification").notify(
-						string.format('"%s" buffer removed', file),
-						vim.log.levels.WARN
-					)
-				end, 10) -- 10 ms delay
-			end,
 		})
 	end,
 }

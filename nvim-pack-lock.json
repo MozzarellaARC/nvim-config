@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "copilot.vim": {
+      "rev": "da369d9",
+      "src": "https://github.com/github/copilot.vim"
+    },
     "kanagawa-paper.nvim": {
       "rev": "b0c4d7c",
       "src": "https://github.com/thesimonho/kanagawa-paper.nvim"
