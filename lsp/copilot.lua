@@ -3,7 +3,7 @@ vim.lsp.config("copilot", {
 	root_markers = { ".git" },
 	settings = {
 		telemetry = {
-			telemetryLevel = "all",
+			telemetryLevel = "none",
 		},
 	},
 })

@@ -63,8 +63,8 @@ vim.g.python3_host_prog = "C:/Users/M/scoop/shims/python313.exe"
 -- LSP enabler
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("pwsh")
-vim.lsp.enable("copilot")
-vim.lsp.enable("pyright")
+-- vim.lsp.enable("copilot")
+vim.lsp.enable("ruff")
 vim.lsp.enable("tailwindcss")
 vim.lsp.enable("css-lsp")
 
