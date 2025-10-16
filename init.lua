@@ -15,7 +15,8 @@ vim.opt.mouse = "a"
 local function focus_window_under_mouse()
 	vim.schedule(function()
 		local mouse_pos = vim.fn.getmousepos()
-		if mouse_pos.winid ~= 0 then
+		local buf_name = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
+		if mouse_pos.winid ~= 0 and buf_name ~= "DiffView" then
 			vim.api.nvim_set_current_win(mouse_pos.winid)
 		end
 	end)
