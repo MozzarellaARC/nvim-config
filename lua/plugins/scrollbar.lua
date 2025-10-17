@@ -9,7 +9,7 @@ return {
 			width = 2,
 			handlers = {
 				cursor = {
-					enable = true,
+					enable = false,
 					-- Supports any number of symbols
 					symbols = { "⎺", "⎻", "⎼", "⎽" },
 					-- symbols = { '⎻', '⎼' }

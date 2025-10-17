@@ -58,22 +58,22 @@ map("i", "<C-ScrollWheelDown>", "<C-o>5zl")
 -- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
 -- FUNCTIONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS
 
--- Buffer navigation keybindings (suppressed in diffview)
-map("n", "<C-S-Left>", function()
-	local ft = vim.bo.filetype
-	local diffview_fts = { "DiffviewFiles", "DiffviewFileHistory", "diff" }
-	if not vim.tbl_contains(diffview_fts, ft) then
-		vim.cmd("BufferPrevious")
-	end
-end) -- Go to previous buffer
-
-map("n", "<C-S-Right>", function()
-	local ft = vim.bo.filetype
-	local diffview_fts = { "DiffviewFiles", "DiffviewFileHistory", "diff" }
-	if not vim.tbl_contains(diffview_fts, ft) then
-		vim.cmd("BufferNext")
-	end
-end) -- Go to next buffer
+-- -- Buffer navigation keybindings (suppressed in diffview)
+-- map("n", "<C-S-Left>", function()
+-- 	local ft = vim.bo.filetype
+-- 	local diffview_fts = { "DiffviewFiles", "DiffviewFileHistory", "diff" }
+-- 	if not vim.tbl_contains(diffview_fts, ft) then
+-- 		vim.cmd("BufferPrevious")
+-- 	end
+-- end) -- Go to previous buffer
+--
+-- map("n", "<C-S-Right>", function()
+-- 	local ft = vim.bo.filetype
+-- 	local diffview_fts = { "DiffviewFiles", "DiffviewFileHistory", "diff" }
+-- 	if not vim.tbl_contains(diffview_fts, ft) then
+-- 		vim.cmd("BufferNext")
+-- 	end
+-- end) -- Go to next buffer
 
 -- Unified view state tracker
 _G.active_side_view = nil
