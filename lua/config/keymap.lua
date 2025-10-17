@@ -172,7 +172,18 @@ local function smart_close()
 end
 
 map({ "n", "v" }, "<C-w>", smart_close, { noremap = true, nowait = true })
-map({ "n", "v" }, "q", smart_close, { noremap = true, nowait = true })
+
+local function window_close()
+	local win = vim.api.nvim_get_current_win()
+	local buf = vim.api.nvim_win_get_buf(win)
+	local name = vim.fn.bufname(buf)
+
+	if name == "" or name == "[Scratch]" then
+		vim.api.nvim_win_close(win, true)
+	end
+end
+
+vim.keymap.set({ "n", "v", "x" }, "q", window_close, { noremap = true, nowait = true })
 
 -- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
 -- FUNCTIONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS
