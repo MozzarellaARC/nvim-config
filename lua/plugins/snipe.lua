@@ -6,7 +6,7 @@ return {
 		snipe.setup({
 			hints = {
 				-- Use numbers instead of letters for marks
-				dictionary = "1234567890",
+				dictionary = "1234567890abcdefghijklmnopqrstuvwxyz",
 			},
 			ui = {
 				-- Where to place the ui window

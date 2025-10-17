@@ -51,7 +51,6 @@ end)
 
 -- Editor
 vim.wo.wrap = false -- Text wrapping
-vim.opt.number = true -- Show absolute line numbers
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -82,10 +81,10 @@ vim.opt.guicursor = {
 }
 
 -- Provider
-vim.g.python3_host_prog = "C:/Users/M/scoop/shims/python313.exe"
+-- vim.g.python3_host_prog = "C:/Users/M/scoop/shims/python313.exe"
 
 -- LSP enabler
-vim.lsp.enable({ "lua_ls", "ruff", "pwsh" })
+vim.lsp.enable({ "lua_ls", "ruff", "pwsh", "basedpyright" })
 -- vim.lsp.enable("copilot")
 
 -- Package Manager
@@ -125,16 +124,37 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- Diagnostics integration
-vim.diagnostic.config({ virtual_text = false })
--- vim.diagnostic.open_float = require("tiny-inline-diagnostic.override").open_float
+vim.diagnostic.config({
+	virtual_text = {
+		enabled = true,
+	},
 
--- Set up diagnostic highlight groups with underlines
-vim.cmd([[
-	highlight DiagnosticUnderlineError cterm=underline gui=underline guisp=Red
-	highlight DiagnosticUnderlineWarn cterm=underline gui=underline guisp=Orange
-	highlight DiagnosticUnderlineInfo cterm=underline gui=underline guisp=LightBlue
-	highlight DiagnosticUnderlineHint cterm=underline gui=underline guisp=LightGray
-]])
+	underline = {
+		enabled = true,
+		severity = {
+			vim.diagnostic.severity.ERROR,
+			vim.diagnostic.severity.WARN,
+			vim.diagnostic.severity.INFO,
+			vim.diagnostic.severity.HINT,
+		},
+	},
+})
+
+-- Float Diagnostics
+vim.opt.updatetime = 250
+vim.api.nvim_create_autocmd("CursorHold", {
+	callback = function()
+		vim.diagnostic.open_float(nil, {
+			focusable = true,
+			border = "none",
+			scope = "cursor",
+			source = "always",
+			max_height = 10,
+			max_width = 80,
+			close_events = { "CursorMoved", "InsertEnter", "WinScrolled" },
+		})
+	end,
+})
 
 -- Suppress specific error messages
 local original_echo = vim.api.nvim_echo
@@ -147,29 +167,6 @@ vim.api.nvim_echo = function(chunks, history, opts)
 	end
 	return original_echo(chunks, history, opts)
 end
-
--- Float Diagnostics
-vim.opt.updatetime = 250
-vim.api.nvim_create_autocmd("CursorHold", {
-	callback = function()
-		local win = vim.diagnostic.open_float(nil, {
-			focusable = true,
-			border = "none",
-			scope = "cursor",
-			source = "always",
-			max_height = 10,
-			max_width = 80,
-			close_events = { "CursorMoved", "InsertEnter", "WinScrolled" },
-		})
-		-- Focus management
-		if win and vim.api.nvim_win_is_valid(win) then
-			vim.api.nvim_set_current_win(win)
-			if vim.api.nvim_current_win(win) then
-				vim.api.nvim_set_current_buf(vim.api.nvim_get_current_buf())
-			end
-		end
-	end,
-})
 
 -- General Floating Window
 vim.api.nvim_create_autocmd("FileType", {

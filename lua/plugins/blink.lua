@@ -42,16 +42,16 @@ return {
 				end,
 				"fallback",
 			},
-			["<CR>"] = {
-				function(cmp)
-					if cmp.is_visible() and cmp.get_selected_item() and vim.api.nvim_get_mode().mode ~= "c" then
-						return cmp.accept()
-					end
-					-- Otherwise insert newline
-					return false
-				end,
-				"fallback",
-			},
+			-- ["<CR>"] = {
+			-- 	function(cmp)
+			-- 		if cmp.is_visible() and cmp.get_selected_item() and vim.api.nvim_get_mode().mode ~= "c" then
+			-- 			return cmp.accept()
+			-- 		end
+			-- 		-- Otherwise insert newline
+			-- 		return false
+			-- 	end,
+			-- 	"fallback",
+			-- },
 		},
 
 		appearance = {
@@ -197,7 +197,6 @@ return {
 				trigger = {
 					show_on_blocked_trigger_characters = {},
 					show_on_x_blocked_trigger_characters = {},
-					show_on_backspace = true,
 				},
 				ghost_text = {
 					enabled = true,
