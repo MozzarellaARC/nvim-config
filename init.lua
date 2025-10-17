@@ -11,6 +11,8 @@ end
 
 vim.opt.mouse = "a"
 
+-- test
+
 -- Mouse auto focus_window_under_mouse
 local function focus_window_under_mouse()
 	vim.schedule(function()

@@ -10,7 +10,7 @@ return {
 				go = { "goimports", "gofmt" },
 				-- You can also customize some of the format options for the filetype
 				rust = { "rustfmt", lsp_format = "fallback" },
-				python = { "ruff", lsp_format = "ruff" },
+				python = { "ruff" },
 				-- You can use a function here to determine the formatters dynamically
 				-- python = function(bufnr)
 				-- 	if require("ruff").get_formatter_info("ruff", bufnr).available then

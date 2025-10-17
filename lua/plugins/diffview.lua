@@ -34,7 +34,7 @@ return {
 				-- For more info, see |diffview-config-view.x.layout|.
 				default = {
 					-- Config for changed files, and staged files in diff views.
-					layout = "diff2_vertical",
+					layout = "diff2_horizontal",
 					disable_diagnostics = false, -- Temporarily disable diagnostics for diff buffers while in the view.
 					winbar_info = false, -- See |diffview-config-view.x.winbar_info|
 				},
@@ -46,7 +46,7 @@ return {
 				},
 				file_history = {
 					-- Config for changed files in file history views.
-					layout = "diff2_vertical",
+					layout = "diff2_horizontal",
 					disable_diagnostics = false, -- Temporarily disable diagnostics for diff buffers while in the view.
 					winbar_info = false, -- See |diffview-config-view.x.winbar_info|
 				},
@@ -92,59 +92,7 @@ return {
 				DiffviewOpen = {},
 				DiffviewFileHistory = {},
 			},
-			hooks = {
-				view_opened = function()
-					-- Hide lualine
-					vim.opt.laststatus = 0
-
-					-- Create a floating window with Fugitive commands
-					local buf = vim.api.nvim_create_buf(false, true)
-					vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf })
-					vim.api.nvim_set_option_value("filetype", "markdown", { buf = buf })
-
-					-- Define the commands to display in a more compact format
-					local commands = {
-						":Git / :G              - Open status       :Git add <f> / % / .- Stage file            :Git branch         - List branches",
-						":Git reset <file>      - Unstage file      :Gwrite / :Gread    - Stage / Checkout      :Git diff --staged  - Staged diff",
-						":Git commit / --amend  - Commit change     :Git log            - Show commit log       :Git blame          - Show blame",
-						":Git push              - Push to remote    :Git pull           - Pull from remote      :Ggrep <pattern>    - Git grep search",
-						":Git checkout <br>     - Switch branch     :Git mergetool      - Merge tool            :GMove :GRename     - Move / Rename",
-						":GDelete               - Untrack file      :Gedit <ref>        - View ref/blob",
-					}
-
-					vim.api.nvim_buf_set_lines(buf, 0, -1, false, commands)
-					vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
-
-					-- Calculate window size
-					local ui = vim.api.nvim_list_uis()[1]
-					local win_width = ui.width
-					local win_height = ui.height
-					local width = math.floor(win_width * 0.9) -- 90% of screen width
-					local height = 1
-
-					-- Window configuration
-					local opts = {
-						relative = "editor",
-						width = width,
-						height = height,
-						col = math.floor((win_width - width) / 2), -- Center horizontally
-						row = win_height - height - 1, -- Position at bottom
-						style = "minimal",
-						border = "none",
-					}
-
-					local win = vim.api.nvim_open_win(buf, false, opts)
-					vim.api.nvim_set_option_value("winblend", 10, { win = win })
-
-					-- Set up keymaps to close the window
-					vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = buf, noremap = true, silent = true })
-					vim.keymap.set("n", "<Esc>", "<cmd>close<CR>", { buffer = buf, noremap = true, silent = true })
-				end,
-				view_closed = function()
-					-- Restore lualine
-					vim.opt.laststatus = 3
-				end,
-			}, -- See |diffview-config-hooks|
+			hook = {},
 			keymaps = {
 				disable_defaults = false, -- Disable the default keymaps
 				view = {
