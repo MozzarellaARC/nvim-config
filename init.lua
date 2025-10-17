@@ -58,8 +58,8 @@ vim.opt.smartindent = true -- Insert indents automatically
 
 -- Theme
 vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
--- vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
-vim.cmd.colorscheme("lackluster") -- Colorscheme
+vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
+-- vim.cmd.colorscheme("lackluster") -- Colorscheme
 vim.opt.winborder = "none"
 
 vim.opt.fillchars:append("diff:╱")
