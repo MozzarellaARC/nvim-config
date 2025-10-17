@@ -6,7 +6,7 @@ return {
 		snipe.setup({
 			hints = {
 				-- Use numbers instead of letters for marks
-				dictionary = "1234567890abcdefghijklmnoprstuvwxyz",
+				dictionary = "1234567890abcefgijklmnoprstuwxyz",
 			},
 			ui = {
 				-- Where to place the ui window
@@ -19,7 +19,7 @@ return {
 				-- for config options
 				---@type vim.api.keyset.win_config
 				open_win_override = {
-					-- title = "My Window Title",
+					title = "Snipe",
 					border = "solid", -- use "rounded" for rounded border
 				},
 			},
