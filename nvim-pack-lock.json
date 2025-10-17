@@ -8,6 +8,10 @@
       "rev": "b0c4d7c",
       "src": "https://github.com/thesimonho/kanagawa-paper.nvim"
     },
+    "lackluster.nvim": {
+      "rev": "70dd682",
+      "src": "https://github.com/slugbyte/lackluster.nvim"
+    },
     "mason-lspconfig.nvim": {
       "rev": "6bdb14f",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"

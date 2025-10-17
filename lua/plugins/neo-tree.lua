@@ -87,15 +87,15 @@ return {
 				git_status = {
 					symbols = {
 						-- Change type
-						added = "", -- or "✚"
-						modified = "", -- or ""
-						deleted = "✖", -- this can only be used in the git_status source
-						renamed = "󰁕", -- this can only be used in the git_status source
+						added = "A", -- or "✚"
+						modified = "M", -- or ""
+						deleted = "D", -- this can only be used in the git_status source
+						renamed = "R", -- this can only be used in the git_status source
 						-- Status type
-						untracked = "",
-						ignored = "",
-						unstaged = "󰄱",
-						staged = "",
+						untracked = "?",
+						ignored = "i",
+						unstaged = "u",
+						staged = "s",
 						conflict = "",
 					},
 				},

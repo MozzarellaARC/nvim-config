@@ -1,6 +1,7 @@
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/thesimonho/kanagawa-paper.nvim" },
+	{ src = "https://github.com/slugbyte/lackluster.nvim" },
 	{ src = "https://github.com/github/copilot.vim" },
 })
 
@@ -10,8 +11,6 @@ if vim.g.neovide then
 end
 
 vim.opt.mouse = "a"
-
--- test
 
 -- Mouse auto focus_window_under_mouse
 local function focus_window_under_mouse()
@@ -59,7 +58,8 @@ vim.opt.smartindent = true -- Insert indents automatically
 
 -- Theme
 vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
-vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
+-- vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
+vim.cmd.colorscheme("lackluster") -- Colorscheme
 vim.opt.winborder = "none"
 
 vim.opt.fillchars:append("diff:╱")
