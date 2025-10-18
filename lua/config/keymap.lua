@@ -110,7 +110,7 @@ local function close_all_views()
 	local copilot_ok, copilot = pcall(require, "CopilotChat")
 	if copilot_ok and copilot.chat and copilot.chat:visible() then
 		pcall(function()
-			copilot.close()
+			vim.cmd("CopilotChatClose")
 		end)
 	end
 end
@@ -158,6 +158,7 @@ local function smart_close()
 	local buftype = vim.bo[current_buf].buftype
 	local name = vim.fn.bufname(current_buf)
 	local win_count = vim.fn.winnr("$")
+	local copilot_ok, copilot = pcall(require, "CopilotChat")
 
 	-- Handle scratch or unnamed buffers
 	if name == "" or name == "[Scratch]" then
@@ -169,11 +170,16 @@ local function smart_close()
 	for _, b in ipairs(vim.api.nvim_list_bufs()) do
 		if vim.api.nvim_buf_is_loaded(b) then
 			local bufname = vim.api.nvim_buf_get_name(b):lower()
-			if bufname:match("undotree") or bufname:match("diffpanel") then
+			if bufname:match("undotree") then
 				vim.cmd("UndotreeToggle")
 				return
 			elseif bufname:match("diffview") then
 				vim.cmd("DiffviewClose")
+				return
+			elseif copilot_ok and copilot.chat and copilot.chat:visible() then
+				pcall(function()
+					vim.cmd("CopilotChatClose")
+				end)
 				return
 			end
 		end
