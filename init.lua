@@ -214,3 +214,5 @@ vim.api.nvim_create_autocmd("FileType", {
 		end
 	end,
 })
+
+-- UndotreeToggle, NeoTree buffer only close, Trouble, ReadOnly

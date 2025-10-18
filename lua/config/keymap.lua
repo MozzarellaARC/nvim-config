@@ -159,6 +159,19 @@ local function smart_close()
 	local buf = vim.api.nvim_win_get_buf(current_win)
 	local buftype = vim.bo[buf].buftype
 
+	for _, b in ipairs(vim.api.nvim_list_bufs()) do
+		if vim.api.nvim_buf_is_loaded(b) then
+			local name = vim.api.nvim_buf_get_name(b):lower()
+			if name:match("undotree") or name:match("diffpanel") then
+				vim.cmd("UndotreeToggle")
+				return
+			elseif name:match("diffview") then
+				vim.cmd("DiffviewClose")
+				return
+			end
+		end
+	end
+
 	if win_count > 1 and buftype == "" then
 		local ok = pcall(function()
 			vim.cmd("close")

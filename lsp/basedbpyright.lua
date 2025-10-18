@@ -18,6 +18,9 @@ return {
 					autoSearchPaths = true,
 					diagnosticMode = "workspace",
 					typeCheckingMode = "basic", -- standard, strict, all, off, basic
+					reportMissingImports = {
+						exclude = "bpy",
+					},
 				},
 				-- python = { venvPath = ".venv/bin/python" }, -- this is a bad config
 			},
