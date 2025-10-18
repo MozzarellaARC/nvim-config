@@ -152,26 +152,34 @@ map({ "n", "v" }, "<F4>", function()
 	end)
 end, { desc = "Toggle Diffview" })
 
--- Buffer deletion Conditional
 local function smart_close()
+	local win = vim.api.nvim_get_current_win()
+	local current_buf = vim.api.nvim_win_get_buf(win)
+	local buftype = vim.bo[current_buf].buftype
+	local name = vim.fn.bufname(current_buf)
 	local win_count = vim.fn.winnr("$")
-	local current_win = vim.api.nvim_get_current_win()
-	local buf = vim.api.nvim_win_get_buf(current_win)
-	local buftype = vim.bo[buf].buftype
 
+	-- Handle scratch or unnamed buffers
+	if name == "" or name == "[Scratch]" then
+		vim.api.nvim_win_close(win, true)
+		return
+	end
+
+	-- Handle special panels first
 	for _, b in ipairs(vim.api.nvim_list_bufs()) do
 		if vim.api.nvim_buf_is_loaded(b) then
-			local name = vim.api.nvim_buf_get_name(b):lower()
-			if name:match("undotree") or name:match("diffpanel") then
+			local bufname = vim.api.nvim_buf_get_name(b):lower()
+			if bufname:match("undotree") or bufname:match("diffpanel") then
 				vim.cmd("UndotreeToggle")
 				return
-			elseif name:match("diffview") then
+			elseif bufname:match("diffview") then
 				vim.cmd("DiffviewClose")
 				return
 			end
 		end
 	end
 
+	-- Handle normal buffers
 	if win_count > 1 and buftype == "" then
 		local ok = pcall(function()
 			vim.cmd("close")
