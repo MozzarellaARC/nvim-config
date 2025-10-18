@@ -7,9 +7,9 @@ vim.pack.add({
 
 -- Neovide specifics
 if vim.g.neovide then
-	vim.o.guifont = "Monaspace Krypton Var:b"
+	vim.o.guifont = "Jetbrains Mono"
 end
-
+vim.keymap.set({ "n", "v", "i" }, "<MiddleMouse>", "<Nop>", { noremap = true, silent = true })
 vim.opt.mouse = "a"
 
 -- Mouse auto focus_window_under_mouse
@@ -214,5 +214,3 @@ vim.api.nvim_create_autocmd("FileType", {
 		end
 	end,
 })
-
--- UndotreeToggle, NeoTree buffer only close, Trouble, ReadOnly
