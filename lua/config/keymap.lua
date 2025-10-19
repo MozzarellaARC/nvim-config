@@ -160,11 +160,11 @@ local function smart_close()
 	local win_count = vim.fn.winnr("$")
 	local copilot_ok, copilot = pcall(require, "CopilotChat")
 
-	-- -- Handle scratch or unnamed buffers
-	-- if name == "" or name == "[Scratch]" or name == "[readonly]" then
-	-- 	vim.cmd("close")
-	-- 	return
-	-- end
+	-- Handle scratch or unnamed buffers
+	if name == "" or name == "[Scratch]" or name == "[readonly]" or "[get_current_view]" then
+		vim.cmd("close")
+		return
+	end
 
 	-- Handle special panels first
 	for _, b in ipairs(vim.api.nvim_list_bufs()) do
