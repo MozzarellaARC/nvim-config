@@ -4,11 +4,9 @@ return {
 		filetype = { "python" },
 		root_markers = {
 			"pyproject.toml",
-			"setup.py",
-			"setup.cfg",
-			"requirements.txt",
-			"Pipfile",
-			"pyrightconfig.json",
+			"blener_manifest.toml",
+			"LICENSE",
+			"README.md",
 			".git",
 		},
 		settings = {

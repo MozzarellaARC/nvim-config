@@ -7,7 +7,9 @@ vim.pack.add({
 
 -- Neovide specifics
 if vim.g.neovide then
-	vim.o.guifont = "Jetbrains Mono"
+	vim.o.guifont = "JetbrainsMono Nerd Font Mono"
+elseif vim.g.nvimqt then
+	vim.o.guifont = "JetbrainsMono Nerd Font Mono"
 end
 vim.keymap.set({ "n", "v", "i" }, "<MiddleMouse>", "<Nop>", { noremap = true, silent = true })
 vim.opt.mouse = "a"
@@ -40,7 +42,7 @@ vim.opt.swapfile = false
 
 -- General keymap settings
 vim.g.mapleader = " " -- Leadner key <space>
-vim.g.maplocalleader = "\\" -- Local leader key <backslash>
+vim.g.maplocalleader = "//" -- Local leader key <backslash>
 vim.opt.clipboard = "unnamedplus" -- Clipboard
 vim.keymap.set({ "n", "x", "v" }, "q", ":bd<CR>", { silent = true }) --Close buffer with 'q'
 vim.keymap.set("n", "<Esc>", function() -- Clear search on <Esc>
@@ -81,10 +83,15 @@ vim.opt.guicursor = {
 }
 
 -- Provider
--- vim.g.python3_host_prog = "C:/Users/M/scoop/shims/python313.exe"
+vim.g.python3_host_prog = "C:/Users/M/scoop/apps/python313/current/python.exe"
 
 -- LSP enabler
-vim.lsp.enable({ "lua_ls", "ruff", "pwsh", "basedpyright" })
+vim.lsp.enable({ "lua_ls" })
+vim.lsp.enable("pwsh")
+vim.lsp.enable("ruff")
+vim.lsp.enable("basedpyright")
+-- vim.lsp.enable("pyright")
+
 -- vim.lsp.enable("copilot")
 
 -- Package Manager

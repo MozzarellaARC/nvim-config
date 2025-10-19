@@ -2,7 +2,12 @@ return {
 	vim.lsp.config("ruff", {
 		cmd = { "ruff", "server" },
 		filetypes = { "python", ".py" },
-		root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git", "main.py", "__init__.py" },
+		root_markers = {
+			"pyproject.toml",
+			"ruff.toml",
+			".ruff.toml",
+			"blender_manifest.toml",
+		},
 		init_options = {
 			settings = {
 				configurationPreference = "filesystemFirst",
