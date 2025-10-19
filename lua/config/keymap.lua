@@ -161,7 +161,7 @@ local function smart_close()
 	local copilot_ok, copilot = pcall(require, "CopilotChat")
 
 	-- Handle scratch or unnamed buffers
-	if name == "" or name == "[Scratch]" or name == "[readonly]" or "[get_current_view]" then
+	if name == "" or name == "[Scratch]" or name == "[readonly]" or "[.git\\COMMIT_EDITMSG]" then
 		vim.cmd("close")
 		return
 	end
