@@ -162,7 +162,7 @@ local function smart_close()
 
 	-- Handle scratch or unnamed buffers
 	if name == "" or name == "[Scratch]" or name == "[readonly]" then
-		vim.api.nvim_win_close(win, true)
+		vim.cmd("close")
 		return
 	end
 
@@ -170,7 +170,7 @@ local function smart_close()
 	for _, b in ipairs(vim.api.nvim_list_bufs()) do
 		if vim.api.nvim_buf_is_loaded(b) then
 			local bufname = vim.api.nvim_buf_get_name(b):lower()
-			if bufname:match("undotree") then
+			if bufname:match("undotree_2") or bufname:match("diffpanel_3") then
 				vim.cmd("UndotreeToggle")
 				return
 			elseif bufname:match("diffview") then
