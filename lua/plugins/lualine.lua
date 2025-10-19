@@ -65,10 +65,10 @@ return {
 					{
 						"datetime",
 						-- options: default, us, uk, iso, or your own format string ("%H:%M", etc..)
-						style = "%B %m | %H:%M",
+						style = "%a | %H:%M",
 					},
 				},
-				lualine_y = {},
+				lualine_y = { { "location" } },
 				lualine_z = {},
 			},
 			inactive_sections = {
