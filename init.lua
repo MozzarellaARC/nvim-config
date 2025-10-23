@@ -1,6 +1,7 @@
 vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/thesimonho/kanagawa-paper.nvim" },
+	{ src = "https://github.com/EdenEast/nightfox.nvim" },
 	{ src = "https://github.com/slugbyte/lackluster.nvim" },
 	{ src = "https://github.com/github/copilot.vim" },
 })
@@ -33,8 +34,8 @@ for _, event in ipairs({ "<ScrollWheelUp>", "<ScrollWheelDown>" }) do
 end
 
 -- Disable netrw
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 0
+vim.g.loaded_netrwPlugin = 0
 
 -- File linker management
 vim.opt.autoread = true
@@ -61,6 +62,7 @@ vim.opt.smartindent = true -- Insert indents automatically
 -- Theme
 vim.opt.termguicolors = true -- Enable 24-bit RGB colors in the terminal
 vim.cmd.colorscheme("kanagawa-paper") -- Colorscheme
+-- vim.cmd.colorscheme("dayfox") -- Colorscheme
 -- vim.cmd.colorscheme("lackluster") -- Colorscheme
 vim.opt.winborder = "none"
 
@@ -88,8 +90,8 @@ vim.g.python3_host_prog = "C:/Users/M/scoop/apps/python313/current/python.exe"
 -- LSP enabler
 vim.lsp.enable({ "lua_ls" })
 vim.lsp.enable("pwsh")
-vim.lsp.enable("ruff")
-vim.lsp.enable("basedpyright")
+-- vim.lsp.enable("ruff")
+-- vim.lsp.enable("basedpyright")
 -- vim.lsp.enable("pyright")
 
 -- vim.lsp.enable("copilot")
