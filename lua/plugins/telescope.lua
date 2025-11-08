@@ -14,7 +14,6 @@ return {
 				mappings = {
 					i = {
 						["<C-h>"] = "which_key",
-						["q"] = "close",
 					},
 					n = {
 						["q"] = "close",

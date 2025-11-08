@@ -159,52 +159,55 @@ local function smart_close()
 	local name = vim.fn.bufname(current_buf)
 	local win_count = vim.fn.winnr("$")
 	local copilot_ok, copilot = pcall(require, "CopilotChat")
-	local actions = require("telescope.actions")
-	local action_state = require("telescope.actions.state")
+
+	-- Handle special panels first (before other conditions)
+	-- Check all windows (not just loaded buffers)
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		local b = vim.api.nvim_win_get_buf(win)
+		local bufname = vim.api.nvim_buf_get_name(b):lower()
+		local filetype = vim.bo[b].filetype
+
+		if bufname:match("undotree") or filetype == "undotree" then
+			vim.cmd("UndotreeToggle")
+			return
+		elseif bufname:match("diffview") or filetype:match("diffview") then
+			vim.cmd("DiffviewClose")
+			return
+		end
+	end
+
+	-- Check Copilot Chat separately
+	if copilot_ok and copilot.chat and copilot.chat:visible() then
+		pcall(function()
+			vim.cmd("CopilotChatClose")
+		end)
+		return
+	end
 
 	-- Handle scratch or unnamed buffers
 	if
-		name:match("")
-		or name:match("[Scratch]")
-		or name:match("[readonly]")
+		name == ""
+		or name:find("[Scratch]", 1, true)
+		or name:find("[readonly]", 1, true)
 		or name:match("%.git[\\/]*COMMIT_EDITMSG")
 	then
 		vim.cmd("close")
 		return
-	elseif name:match("[Quickfix list]") then
+	elseif name:find("[Quickfix list]", 1, true) then
 		vim.cmd("cclose")
 		return
 	end
 
-	-- Handle special panels first
-	for _, b in ipairs(vim.api.nvim_list_bufs()) do
-		if vim.api.nvim_buf_is_loaded(b) then
-			local bufname = vim.api.nvim_buf_get_name(b):lower()
-			if bufname:match("undotree_2") or bufname:match("diffpanel_3") then
-				vim.cmd("UndotreeToggle")
-				return
-			elseif bufname:match("diffview") then
-				vim.cmd("DiffviewClose")
-				return
-			elseif copilot_ok and copilot.chat and copilot.chat:visible() then
-				pcall(function()
-					vim.cmd("CopilotChatClose")
-				end)
-				return
-			end
-		end
-	end
-
 	-- Handle normal buffers
-	if win_count > 1 and buftype == "" then
+	if win_count > 1 and buftype:match("") then
 		local ok = pcall(function()
-			vim.cmd("bdelete")
+			vim.cmd("close")
 		end)
 		if not ok then
-			vim.cmd("bdelete")
+			vim.cmd("bd")
 		end
 	else
-		vim.cmd("bdelete")
+		vim.cmd("bd")
 	end
 end
 

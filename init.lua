@@ -45,7 +45,6 @@ vim.opt.swapfile = false
 vim.g.mapleader = " " -- Leadner key <space>
 vim.g.maplocalleader = "//" -- Local leader key <backslash>
 vim.opt.clipboard = "unnamedplus" -- Clipboard
-vim.keymap.set({ "n", "x", "v" }, "q", ":bd<CR>", { silent = true }) --Close buffer with 'q'
 vim.keymap.set("n", "<Esc>", function() -- Clear search on <Esc>
 	vim.fn.setreg("/", "")
 	vim.cmd("nohlsearch")
