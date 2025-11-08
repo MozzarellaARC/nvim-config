@@ -66,7 +66,7 @@ return {
 			menu = {
 				draw = {
 					-- Aligns the keyword you've typed to a component in the menu
-					align_to = "label", -- or 'none' to disable, or 'cursor' to align to the cursor
+					align_to = "cursor", -- or 'none' to disable, or 'cursor' to align to the cursor
 					-- Left and right padding, optionally { left, right } for different padding on each side
 					padding = 1,
 					-- Gap between columns
