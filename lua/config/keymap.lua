@@ -159,9 +159,16 @@ local function smart_close()
 	local name = vim.fn.bufname(current_buf)
 	local win_count = vim.fn.winnr("$")
 	local copilot_ok, copilot = pcall(require, "CopilotChat")
+	local actions = require("telescope.actions")
+	local action_state = require("telescope.actions.state")
 
 	-- Handle scratch or unnamed buffers
-	if name == "" or name == "[Scratch]" or name == "[readonly]" or name:match("%.git[\\/]*COMMIT_EDITMSG") then
+	if
+		name:match("")
+		or name:match("[Scratch]")
+		or name:match("[readonly]")
+		or name:match("%.git[\\/]*COMMIT_EDITMSG")
+	then
 		vim.cmd("close")
 		return
 	elseif name:match("[Quickfix list]") then
