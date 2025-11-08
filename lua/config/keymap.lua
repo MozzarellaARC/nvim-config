@@ -164,6 +164,9 @@ local function smart_close()
 	if name == "" or name == "[Scratch]" or name == "[readonly]" or name:match("%.git[\\/]*COMMIT_EDITMSG") then
 		vim.cmd("close")
 		return
+	elseif name:match("[Quickfix list]") then
+		vim.cmd("cclose")
+		return
 	end
 
 	-- Handle special panels first
@@ -188,13 +191,13 @@ local function smart_close()
 	-- Handle normal buffers
 	if win_count > 1 and buftype == "" then
 		local ok = pcall(function()
-			vim.cmd("close")
+			vim.cmd("bdelete")
 		end)
 		if not ok then
-			vim.cmd("bd")
+			vim.cmd("bdelete")
 		end
 	else
-		vim.cmd("bd")
+		vim.cmd("bdelete")
 	end
 end
 
