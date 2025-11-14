@@ -7,7 +7,7 @@ return {
 
 		telescope.setup({
 			defaults = {
-				border = false,
+				border = true,
 				results_title = false,
 				prompt_title = false,
 				preview_title = false,

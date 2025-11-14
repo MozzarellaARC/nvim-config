@@ -89,8 +89,8 @@ vim.g.python3_host_prog = "C:/Users/M/scoop/apps/python313/current/python.exe"
 -- LSP enabler
 vim.lsp.enable({ "lua_ls" })
 vim.lsp.enable("pwsh")
--- vim.lsp.enable("ruff")
--- vim.lsp.enable("basedpyright")
+vim.lsp.enable("ruff")
+vim.lsp.enable("basedpyright")
 -- vim.lsp.enable("pyright")
 
 -- vim.lsp.enable("copilot")
@@ -133,9 +133,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- Diagnostics integration
 vim.diagnostic.config({
-	virtual_text = {
-		enabled = true,
-	},
+	-- virtual_text = {
+	-- 	enabled = true,
+	-- },
 	signs = false,
 	underline = {
 		enabled = true,
