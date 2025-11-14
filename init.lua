@@ -15,6 +15,12 @@ end
 vim.keymap.set({ "n", "v", "i" }, "<MiddleMouse>", "<Nop>", { noremap = true, silent = true })
 vim.opt.mouse = "a"
 
+vim.opt.shell = "pwsh"
+vim.opt.shellcmdflag = "-NoLogo -NoExit -Command"
+vim.opt.shellquote = ""
+vim.opt.shellxquote = ""
+vim.opt.termguicolors = true
+
 -- Mouse auto focus_window_under_mouse
 local function focus_window_under_mouse()
 	vim.schedule(function()
