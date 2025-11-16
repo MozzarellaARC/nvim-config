@@ -8,6 +8,8 @@ map({ "n", "v" }, "k", "<Nop>")
 map({ "n", "v" }, "l", "<Nop>")
 map({ "n", "v" }, "Q", "<Nop>")
 
+map("t", "<Esc>", [[<C-\><C-n>]], { noremap = true })
+
 ---General keybindings
 map("n", "z", "u") -- undo with z
 map("n", "<C-S-z>", "<C-r>") -- Redo with Shift+z
