@@ -19,7 +19,6 @@ vim.opt.shell = "pwsh"
 vim.opt.shellcmdflag = "-NoLogo -NoExit -Command"
 vim.opt.shellquote = ""
 vim.opt.shellxquote = ""
-vim.opt.termguicolors = true
 
 -- Mouse auto focus_window_under_mouse
 local function focus_window_under_mouse()
@@ -97,6 +96,7 @@ vim.lsp.enable({ "lua_ls" })
 vim.lsp.enable("pwsh")
 vim.lsp.enable("ruff")
 vim.lsp.enable("basedpyright")
+vim.lsp.enable("rust_analyzer")
 -- vim.lsp.enable("pyright")
 
 -- vim.lsp.enable("copilot")
