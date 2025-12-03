@@ -17,7 +17,6 @@ vim.keymap.set({ "n", "v", "i" }, "<MiddleMouse>", "<Nop>", { noremap = true, si
 vim.opt.mouse = "a"
 
 vim.o.shell = "C:\\Users\\M\\AppData\\Local\\nvim\\vim_shell.bat"
-vim.o.shellcmdflag = "/c"
 
 -- Mouse auto focus_window_under_mouse
 local function focus_window_under_mouse()
