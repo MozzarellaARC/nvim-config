@@ -20,6 +20,7 @@ return {
 		}
 		---@module 'neo-tree'
 		require("neo-tree").setup({
+			bind_to_cwd = true,
 			close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 			popup_border_style = "", -- or "" to use 'winborder' on Neovim v0.11+
 			enable_git_status = true,
@@ -229,7 +230,7 @@ return {
 						".ignore",
 						-- ".rgignore"
 					},
-					hide_hidden = true, -- only works on Windows for hidden files/directories
+					hide_hidden = false, -- only works on Windows for hidden files/directories
 					hide_by_name = {
 						--"node_modules"
 					},
@@ -252,6 +253,7 @@ return {
 					},
 				},
 				follow_current_file = {
+					bind_to_cwd = true,
 					enabled = true, -- This will find and focus the file in the active buffer every time
 					--               -- the current file is changed while the tree is open.
 					leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
@@ -262,7 +264,7 @@ return {
 				-- "open_current",  -- netrw disabled, opening a directory opens within the
 				-- window like netrw would, regardless of window.position
 				-- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-				use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
+				use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
 				-- instead of relying on nvim autocmd events.
 				window = {
 					mappings = {

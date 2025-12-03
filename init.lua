@@ -16,12 +16,9 @@ end
 vim.keymap.set({ "n", "v", "i" }, "<MiddleMouse>", "<Nop>", { noremap = true, silent = true })
 vim.opt.mouse = "a"
 
-vim.opt.shell = "pwsh"
-vim.opt.shellcmdflag = "-NoLogo -NoExit -Command"
-vim.opt.shellquote = ""
-vim.opt.shellxquote = ""
-
-vim.opt.scrollback = 100000
+-- vim.o.shell = "cmd"
+vim.o.shell = "C:\\Users\\M\\AppData\\Local\\nvim\\vim_shell.bat"
+vim.o.shellcmdflag = "/c"
 
 -- Mouse auto focus_window_under_mouse
 local function focus_window_under_mouse()
@@ -42,8 +39,9 @@ for _, event in ipairs({ "<ScrollWheelUp>", "<ScrollWheelDown>" }) do
 end
 
 -- Disable netrw
-vim.g.loaded_netrw = 0
-vim.g.loaded_netrwPlugin = 0
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.o.autochdir = false
 
 -- File linker management
 vim.opt.autoread = true
