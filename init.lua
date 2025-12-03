@@ -39,9 +39,8 @@ for _, event in ipairs({ "<ScrollWheelUp>", "<ScrollWheelDown>" }) do
 end
 
 -- Disable netrw
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.o.autochdir = false
+vim.g.loaded_netrw = 0
+vim.g.loaded_netrwPlugin = 0
 
 -- File linker management
 vim.opt.autoread = true
