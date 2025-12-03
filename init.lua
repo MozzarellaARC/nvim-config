@@ -21,9 +21,6 @@ vim.opt.shellcmdflag = "-NoLogo -NoExit -Command"
 vim.opt.shellquote = ""
 vim.opt.shellxquote = ""
 
-local term_buf = nil -- will store our terminal buffer
-local term_win = nil -- will store the window id
-
 vim.opt.scrollback = 100000
 
 -- Mouse auto focus_window_under_mouse

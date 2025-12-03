@@ -244,28 +244,37 @@ vim.api.nvim_create_autocmd("WinEnter", {
 	end,
 })
 
+local term_buf = nil -- will store our terminal buffer
+local term_win = nil -- will store the window id
+local term_height = 12
+
 -- Toggle a terminal split below with `
 vim.keymap.set({ "n", "t" }, "`", function()
-	-- If window is open → close it
+	-- If terminal window is open → close it
 	if term_win and vim.api.nvim_win_is_valid(term_win) then
 		vim.api.nvim_win_close(term_win, true)
 		term_win = nil
 		return
 	end
 
-	-- If buffer doesn't exist → create terminal once
+	-- If terminal buffer doesn't exist → create it
 	if not term_buf or not vim.api.nvim_buf_is_valid(term_buf) then
 		vim.cmd("belowright split")
 		term_win = vim.api.nvim_get_current_win()
+		vim.api.nvim_win_set_height(term_win, term_height)
 		vim.cmd("terminal")
 		term_buf = vim.api.nvim_get_current_buf()
 		return
 	end
 
-	-- If buffer exists → reopen it in a new split
+	-- Buffer exists → reopen it
 	vim.cmd("belowright split")
 	term_win = vim.api.nvim_get_current_win()
+	vim.api.nvim_win_set_height(term_win, term_height)
 	vim.api.nvim_win_set_buf(term_win, term_buf)
+
+	-- optional: auto-enter insert mode
+	vim.cmd("startinsert")
 end, { noremap = true, silent = true })
 
 -- IONS, FUNCTIOS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUNCTIONS, FUU
