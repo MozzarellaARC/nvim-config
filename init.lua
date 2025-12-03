@@ -54,7 +54,7 @@ vim.keymap.set("n", "<Esc>", function() -- Clear search on <Esc>
 end)
 
 -- Editor
-vim.wo.wrap = false -- Text wrapping
+vim.wo.wrap = true -- Text wrapping
 vim.opt.number = true
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
