@@ -231,8 +231,3 @@ vim.api.nvim_create_autocmd("FileType", {
 		end
 	end,
 })
-
--- Source - https://stackoverflow.com/q
--- Posted by jeremywat, modified by community. See post 'Timeline' for change history
--- Retrieved 2025-12-03, License - CC BY-SA 4.0
---
