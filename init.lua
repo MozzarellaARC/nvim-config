@@ -16,7 +16,6 @@ end
 vim.keymap.set({ "n", "v", "i" }, "<MiddleMouse>", "<Nop>", { noremap = true, silent = true })
 vim.opt.mouse = "a"
 
--- vim.o.shell = "cmd"
 vim.o.shell = "C:\\Users\\M\\AppData\\Local\\nvim\\vim_shell.bat"
 vim.o.shellcmdflag = "/c"
 
