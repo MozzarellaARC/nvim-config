@@ -245,7 +245,7 @@ vim.api.nvim_create_autocmd("WinEnter", {
 })
 
 local terminals = {} -- { [cwd] = { buf = buf_id, win = win_id } }
-local term_height = 15
+local term_height = 12
 
 vim.keymap.set({ "n", "t" }, "`", function()
 	local cwd = vim.fn.getcwd()

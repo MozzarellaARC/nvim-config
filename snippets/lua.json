@@ -1,0 +1,10 @@
+{ 
+  "VIM Shell": {
+  "prefix": "vimshell",
+  "body": [
+    "vim.o.shell = \"C:\\\\Users\\\\M\\\\AppData\\\\Local\\\\nvim\\\\vim_shell.bat\"",
+    ""
+  ],
+  "description": ""
+  } 
+}
