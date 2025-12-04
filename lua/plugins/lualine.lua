@@ -61,6 +61,7 @@ return {
 					},
 				},
 				lualine_x = {
+					{ "lsp_status" },
 					{ "encoding", show_bomb = true },
 					{
 						"datetime",
