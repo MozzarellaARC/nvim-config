@@ -16,7 +16,7 @@ end
 vim.keymap.set({ "n", "v", "i" }, "<MiddleMouse>", "<Nop>", { noremap = true, silent = true })
 vim.opt.mouse = "a"
 
-vim.o.shell = "C:\\Users\\M\\AppData\\Local\\nvim\\vim_shell.bat"
+vim.o.shell = "powershell -noe -NoLogo"
 
 -- Mouse auto focus_window_under_mouse
 local function focus_window_under_mouse()

@@ -11,6 +11,7 @@ return {
 				-- You can also customize some of the format options for the filetype
 				rust = { "rustfmt", lsp_format = "fallback" },
 				python = { "ruff" },
+				json = { "prettierd" },
 				-- You can use a function here to determine the formatters dynamically
 				-- python = function(bufnr)
 				-- 	if require("ruff").get_formatter_info("ruff", bufnr).available then
